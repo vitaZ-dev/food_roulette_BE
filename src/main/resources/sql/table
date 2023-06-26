@@ -41,16 +41,17 @@ ENGINE=InnoDB
 CREATE TABLE `p_user_menu` (
 	`iuser_menu` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`iuser` BIGINT(20) UNSIGNED NOT NULL,
-	`del_yn` TINYINT(3) UNSIGNED NULL DEFAULT '0',
 	`menu` VARCHAR(20) NOT NULL COLLATE 'utf8mb4_general_ci',
 	`normal_price` INT(10) UNSIGNED NOT NULL,
-	`selections_number` INT(10) UNSIGNED NULL DEFAULT '0',
 	PRIMARY KEY (`iuser_menu`) USING BTREE,
 	UNIQUE INDEX `menu` (`menu`, `iuser`) USING BTREE,
 	INDEX `iuser` (`iuser`) USING BTREE,
-	CONSTRAINT `p_user_menu_ibfk_1` FOREIGN KEY (`iuser`) REFERENCES `team_c`.`p_user` (`iuser`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-	CONSTRAINT `del_yn` CHECK (`del_yn` in (0,1))
-)AUTO_INCREMENT 1000;
+	CONSTRAINT `p_user_menu_ibfk_1` FOREIGN KEY (`iuser`) REFERENCES `team_c`.`p_user` (`iuser`) ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=1000
+;
 
 
 
