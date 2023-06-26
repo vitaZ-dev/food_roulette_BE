@@ -1,4 +1,4 @@
-package com.green.food_roulette.p_management;
+package com.green.food_roulette.management;
 
 import org.apache.ibatis.annotations.Mapper;
 
