@@ -2,6 +2,7 @@ package com.green.food_roulette.management;
 
 import com.green.food_roulette.management.model.ManagementMonthDto;
 import com.green.food_roulette.management.model.ManagementMonthVo;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class ManagementController {
     private final ManagementService service;
 
     @GetMapping("/{iuser}/roulette")
+    @Operation(summary = "이달의 목표 불러오기")
     public ManagementMonthVo getUserThisMonthManagement(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();
         dto.setIuser(iuser);
@@ -27,6 +29,7 @@ public class ManagementController {
     }
 
     @GetMapping("/{iuser}/calculate")
+    @Operation(summary = "목표 모두 불러오기")
     public List<ManagementMonthVo> getUserManagementList(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();
         dto.setIuser(iuser);
