@@ -17,6 +17,6 @@
         ,balance,expense
         from p_management
         where iuser = #{iuser}
-        order by imanagement
+        order by year,month
     </select>
 </mapper>

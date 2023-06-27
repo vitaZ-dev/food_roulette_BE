@@ -10,14 +10,15 @@
                 end  cmt
         FROM p_payment A
         INNER JOIN (
-        SELECT X.imanagement
-        FROM p_management X
-        INNER JOIN p_user Y
-        ON X.iuser=Y.iuser
-        WHERE X.iuser=#{iuser} AND X.year=#{year} AND X.month=#{month}
+            SELECT X.imanagement
+            FROM p_management X
+            INNER JOIN p_user Y
+            ON X.iuser=Y.iuser
+            WHERE X.iuser=#{iuser} AND X.year=#{year} AND X.month=#{month}
         ) B
         ON A.imanagement = B.imanagement
         GROUP BY DATE(paymentAt)
+        ORDER BY A.payment_at
     </select>
     
     <select id="getUserDetailPayment">
