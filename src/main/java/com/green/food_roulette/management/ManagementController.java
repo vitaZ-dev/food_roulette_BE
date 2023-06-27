@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping
+@RequestMapping("/{iuser}")
 @RestController
 @Tag(name = "월별 목표")
 @RequiredArgsConstructor
 public class ManagementController {
     private final ManagementService service;
 
-    @GetMapping("/{iuser}/roulette")
+    @GetMapping("/roulette")
     @Operation(summary = "이달의 목표 불러오기")
     public ManagementMonthVo getUserThisMonthManagement(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();
@@ -29,7 +29,7 @@ public class ManagementController {
         return result;
     }
 
-    @GetMapping("/{iuser}/calculate")
+    @GetMapping("/calculate")
     @Operation(summary = "목표 모두 불러오기")
     public List<ManagementMonthVo> getUserManagementList(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();

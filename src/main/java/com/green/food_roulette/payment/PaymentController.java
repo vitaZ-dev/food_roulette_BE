@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/{iuser}")
 @Tag(name = "유저 소비내역")
 @RequiredArgsConstructor
 public class PaymentController {
     private final PaymentService service;
 
-    @GetMapping("/{iuser}/calendar")
+    @GetMapping("/calendar")
     @Operation(summary = "해당 달의 소비 내역들")
     public List<PaymentMonthListVo> getUserPaymentList(@PathVariable Long iuser,String year,int month){
         PaymentMonthListDto dto = new PaymentMonthListDto();
