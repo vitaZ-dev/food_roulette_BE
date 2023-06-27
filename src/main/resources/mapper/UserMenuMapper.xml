@@ -20,5 +20,24 @@
         from p_user_menu
         where iuser_menu=#{iuserMenu}
     </select>
-
+    <select id="getUserMenu">
+        select iuser_menu iuserMenu, menu,iuser,activation
+        from p_user_menu
+        where iuser=#{iuser}
+    </select>
+    <select id="getActivationUserMenu">
+        select iuser_menu iuserMenu, menu,iuser,activation
+        from p_user_menu
+        where iuser=#{iuser} and activation=0
+    </select>
+    <update id="updActivation">
+        update p_user_menu
+        set activation =#{activation}
+        where iuser_menu=#{iuserMenu}
+    </update>
+    <select id="findActivation">
+        select activation
+        from p_user_menu
+        where iuser_menu=#{iuserMenu}
+    </select>
 </mapper>
