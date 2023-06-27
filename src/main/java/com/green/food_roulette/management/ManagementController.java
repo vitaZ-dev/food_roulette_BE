@@ -25,7 +25,8 @@ public class ManagementController {
     public ManagementMonthVo getUserThisMonthManagement(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();
         dto.setIuser(iuser);
-        return service.getUserThisMonthManagement(dto);
+        ManagementMonthVo result = service.getUserThisMonthManagement(dto);
+        return result;
     }
 
     @GetMapping("/{iuser}/calculate")

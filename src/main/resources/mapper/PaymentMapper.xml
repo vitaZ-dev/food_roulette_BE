@@ -15,6 +15,20 @@
         ) B
         ON A.imanagement = B.imanagement
         GROUP BY DATE(paymentAt)
-
+    </select>
+    
+    <select id="getUserDetailPayment">
+        SELECT A.ipayment,A.payment_at paymentAt,A.current_menu_price
+        FROM p_payment A
+        INNER JOIN (
+        SELECT X.imanagement
+        FROM p_management X
+        INNER JOIN p_user Y
+        ON X.iuser=Y.iuser
+        WHERE X.iuser=#{iuser}
+        ) B
+        ON A.imanagement = B.imanagement
+        WHERE date(A.payment_at)=#{paymentAt}
+        ;
     </select>
 </mapper>
