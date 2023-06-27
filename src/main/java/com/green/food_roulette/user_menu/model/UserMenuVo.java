@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class UserMenuVo {
-    private String menu;
     private Long iuserMenu;
+    private String menu;
+    private Long iuser;
     private int activation;
 }

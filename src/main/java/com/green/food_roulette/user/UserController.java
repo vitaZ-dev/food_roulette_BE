@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.zip.ZipException;
 
 @RestController
 @RequestMapping
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService service;
     @PostMapping
     @Operation(summary ="유저생성" )
-    public UserVo postUser(@RequestBody UserInsDto dto) {
+    public UserVo postUser(@RequestBody UserInsDto dto){
         return service.postUser(dto);
     }
 }
