@@ -13,4 +13,5 @@ public interface ManagementMapper {
     int setUserThisMonthManagement(ManagemetSetMonthDto dto);
     ManagementMonthVo getUserThisMonthManagement(ManagementMonthDto dto);
     List<ManagementMonthVo>getUserManagementList(ManagementMonthDto dto);
+    int updUserMonthManagement(ManagemetSetMonthDto dto);
 }

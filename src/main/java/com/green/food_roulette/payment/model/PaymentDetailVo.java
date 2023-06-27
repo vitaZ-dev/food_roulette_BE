@@ -7,7 +7,7 @@ import lombok.Getter;
 @Data
 public class PaymentDetailVo {
     private Long ipayment;
-    private Long imenu;
+    private String  menu;
     private String paymentAt;
     private int currentMenuPrice;
     private short reviewGrade;

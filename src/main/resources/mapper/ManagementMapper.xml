@@ -28,4 +28,12 @@
         where iuser = #{iuser}
         order by year,month
     </select>
+    
+    <update id="updUserMonthManagement">
+        update  p_management
+        set
+            month_limit= month_limit + #{monthLimit}
+        ,balance= balance + #{monthLimit}
+        where iuser=#{iuser} and year=year(current_timestamp()) and month = month(current_timestamp())
+    </update>
 </mapper>
