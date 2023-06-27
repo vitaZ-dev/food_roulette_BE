@@ -2,14 +2,12 @@ package com.green.food_roulette.management;
 
 import com.green.food_roulette.management.model.ManagementMonthDto;
 import com.green.food_roulette.management.model.ManagementMonthVo;
+import com.green.food_roulette.management.model.ManagemetSetMonthDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +17,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ManagementController {
     private final ManagementService service;
+
+    @PostMapping("/roulette")
+    @Operation(summary = "이달의 목표 설정하기")
+    public ManagementMonthVo setUserMonthManagement(@RequestBody ManagemetSetMonthDto dto){
+       return service.setUserThisMonthManagement(dto);
+    }
 
     @GetMapping("/roulette")
     @Operation(summary = "이달의 목표 불러오기")

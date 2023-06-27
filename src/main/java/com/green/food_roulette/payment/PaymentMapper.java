@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface PaymentMapper {
+
     List<PaymentMonthListVo>getUserPaymentList(PaymentMonthListDto dto);
     List<PaymentDetailVo>getUserDetailPayment(PaymentDetailDto dto);
 }

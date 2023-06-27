@@ -6,6 +6,7 @@ import com.green.food_roulette.payment.model.PaymentMonthListDto;
 import com.green.food_roulette.payment.model.PaymentMonthListVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jdk.jfr.Description;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class PaymentController {
     }
 
     @GetMapping("/calender/detail")
-    @Operation(summary = "해당 일의 소비 내역들")
+    @Operation(summary = "해당 일의 소비 내역들 paymentAt ex)yy-mm-dd")
     public List<PaymentDetailVo>getUserDetailPayment(@PathVariable Long iuser,String  paymentAt){
         PaymentDetailDto dto = new PaymentDetailDto();
         dto.setIuser(iuser);
