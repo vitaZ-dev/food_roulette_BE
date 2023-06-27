@@ -17,4 +17,9 @@
         from p_user
         where iuser=#{iuser}
     </select>
+    <select id="getUser">
+        select iuser,name
+        from p_user
+        where iuser=#{iuser}
+    </select>
 </mapper>

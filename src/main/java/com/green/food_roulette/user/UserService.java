@@ -2,6 +2,7 @@ package com.green.food_roulette.user;
 
 import com.green.food_roulette.user.model.UserEntity;
 import com.green.food_roulette.user.model.UserInsDto;
+import com.green.food_roulette.user.model.UserIuserDto;
 import com.green.food_roulette.user.model.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,8 @@ public class UserService {
             result =  mapper.selUser(entity.getIuser());
         }
         return result;
+    }
+    public UserVo getUser(UserIuserDto dto){
+        return mapper.getUser(dto);
     }
 }

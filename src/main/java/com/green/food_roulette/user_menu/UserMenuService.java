@@ -1,14 +1,11 @@
 package com.green.food_roulette.user_menu;
 
-import com.green.food_roulette.user_menu.model.UserMenuEntity;
-import com.green.food_roulette.user_menu.model.UserMenuInsDto;
-import com.green.food_roulette.user_menu.model.UserMenuVo;
+import com.green.food_roulette.user_menu.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.RollbackRuleAttribute;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.zip.ZipException;
 
 @Service
@@ -28,4 +25,23 @@ public class UserMenuService {
         }
             throw new ZipException();
     }
-}
+    public List<UserMenuVo> getUserMenu(UserMenuIuserDto dto){
+        return mapper.getUserMenu(dto);
+    }
+    public List<UserMenuVo> getActivationUserMenu(UserMenuIuserDto dto){
+        return mapper.getActivationUserMenu(dto);
+    }
+    public int updActivation(UserMenuIuserMenuDto dto){
+        UserMenuEntity entity = new UserMenuEntity();
+        entity.setIuserMenu(dto.getIuserMenu());
+        int result = mapper.findActivation(entity);
+        if (result != 0) {
+            entity.setActivation(0);
+        }else{
+            entity.setActivation(1);
+        }
+        System.out.println(entity.getActivation());
+        mapper.updActivation(entity);
+        return entity.getActivation();
+        }
+    }
