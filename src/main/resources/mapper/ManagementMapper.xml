@@ -8,7 +8,15 @@
                 ,balance,expense
         from p_management
         where iuser = #{iuser}
-            and year = year(now())
-            and month = month(now())
+            and year = year(current_timestamp())
+            and month = month(current_timestamp())
+    </select>
+
+    <select id="getUserManagementList">
+        select imanagement, year,month,month_limit monthLimit
+        ,balance,expense
+        from p_management
+        where iuser = #{iuser}
+        order by imanagement
     </select>
 </mapper>
