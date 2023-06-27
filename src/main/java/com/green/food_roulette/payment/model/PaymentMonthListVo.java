@@ -9,4 +9,5 @@ public class PaymentMonthListVo {
     private Long ipayment;
     private String paymentAt;
     private int total;
+    private int cmt;
 }

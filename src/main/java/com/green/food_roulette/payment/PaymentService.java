@@ -1,5 +1,7 @@
 package com.green.food_roulette.payment;
 
+import com.green.food_roulette.payment.model.PaymentDetailDto;
+import com.green.food_roulette.payment.model.PaymentDetailVo;
 import com.green.food_roulette.payment.model.PaymentMonthListDto;
 import com.green.food_roulette.payment.model.PaymentMonthListVo;
 import lombok.RequiredArgsConstructor;
@@ -14,5 +16,9 @@ public class PaymentService {
 
     public List<PaymentMonthListVo> getUserPaymentList(PaymentMonthListDto dto){
        return mapper.getUserPaymentList(dto);
+    }
+
+    public List<PaymentDetailVo>getUserDetailPayment(PaymentDetailDto dto){
+        return mapper.getUserDetailPayment(dto);
     }
 }

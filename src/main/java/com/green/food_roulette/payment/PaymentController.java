@@ -1,5 +1,7 @@
 package com.green.food_roulette.payment;
 
+import com.green.food_roulette.payment.model.PaymentDetailDto;
+import com.green.food_roulette.payment.model.PaymentDetailVo;
 import com.green.food_roulette.payment.model.PaymentMonthListDto;
 import com.green.food_roulette.payment.model.PaymentMonthListVo;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,5 +30,15 @@ public class PaymentController {
         dto.setYear(year);
         dto.setMonth(month);
         return service.getUserPaymentList(dto);
+    }
+
+    @GetMapping("/calender/detail")
+    @Operation(summary = "해당 일의 소비 내역들")
+    public List<PaymentDetailVo>getUserDetailPayment(@PathVariable Long iuser,String  paymentAt){
+        PaymentDetailDto dto = new PaymentDetailDto();
+        dto.setIuser(iuser);
+        dto.setPaymentAt(paymentAt);
+        return service.getUserDetailPayment(dto);
+
     }
 }

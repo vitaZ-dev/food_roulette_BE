@@ -5,6 +5,9 @@
 <mapper namespace="com.green.food_roulette.payment.PaymentMapper">
     <select id="getUserPaymentList">
         SELECT A.ipayment,DATE(A.payment_at) paymentAt,SUM(A.current_menu_price) total
+                ,case
+                    when A.review_grade is NULL then '0' ELSE '1'
+                end  cmt
         FROM p_payment A
         INNER JOIN (
         SELECT X.imanagement
@@ -19,7 +22,7 @@
     
     <select id="getUserDetailPayment">
         SELECT A.ipayment,A.imenu,A.payment_at paymentAt
-        ,A.current_menu_price,A.review_grade,A.restaurant
+        ,A.current_menu_price currentMenuPrice,A.review_grade reviewGrade,A.restaurant
         FROM p_payment A
             INNER JOIN (
             SELECT X.imanagement
