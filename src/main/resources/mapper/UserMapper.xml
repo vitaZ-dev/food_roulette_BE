@@ -3,4 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.food_roulette.user.UserMapper">
+    <insert id="insUser" useGeneratedKeys="true" keyProperty="iuser">
+        insert into p_user
+        set name =#{name}
+    </insert>
+    <select id="findUser">
+        select iuser,name
+        from p_user
+        where name =#{name}
+    </select>
 </mapper>
