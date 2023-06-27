@@ -3,4 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.food_roulette.user_menu.UserMenuMapper">
+    <insert id="insUserMenu" useGeneratedKeys="true" keyProperty="iuserMenu">
+        insert into p_user_menu
+        set menu=#{menu}
+        ,iuser=#{iuser}
+    </insert>
+    <select id="findUserMenu">
+        select iuser_menu iuserMenu
+        from p_user_menu
+        where iuser=#{iuser} and menu=#{menu}
+    </select>
+    <select id="selUserMenu">
+        select iuser_menu iuserMenu, menu, activation
+        from p_user_menu
+        where iuser_menu=#{iuserMenu}
+    </select>
 </mapper>

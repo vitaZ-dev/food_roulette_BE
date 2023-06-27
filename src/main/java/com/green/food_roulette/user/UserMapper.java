@@ -10,6 +10,5 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
    Long insUser(UserEntity entity);
-    UserVo findUser(UserEntity entity);
-
+   UserVo findUser(UserEntity entity);
 }
