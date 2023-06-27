@@ -2,5 +2,21 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.green.food_roulette.p_management.ManagementMapper">
+<mapper namespace="com.green.food_roulette.management.ManagementMapper">
+    <select id="getUserThisMonthManagement">
+        select imanagement, year,month,month_limit monthLimit
+                ,balance,expense
+        from p_management
+        where iuser = #{iuser}
+            and year = year(current_timestamp())
+            and month = month(current_timestamp())
+    </select>
+
+    <select id="getUserManagementList">
+        select imanagement, year,month,month_limit monthLimit
+        ,balance,expense
+        from p_management
+        where iuser = #{iuser}
+        order by imanagement
+    </select>
 </mapper>

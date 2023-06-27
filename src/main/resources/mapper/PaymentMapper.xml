@@ -2,5 +2,19 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.green.food_roulette.p_payment.PaymentMapper">
+<mapper namespace="com.green.food_roulette.payment.PaymentMapper">
+    <select id="getUserPaymentList">
+        SELECT A.ipayment,DATE(A.payment_at) paymentAt,SUM(A.current_menu_price) total
+        FROM p_payment A
+        INNER JOIN (
+        SELECT X.imanagement
+        FROM p_management X
+        INNER JOIN p_user Y
+        ON X.iuser=Y.iuser
+        WHERE X.iuser=#{iuser} AND X.year=#{year} AND X.month=#{month}
+        ) B
+        ON A.imanagement = B.imanagement
+        GROUP BY DATE(paymentAt)
+
+    </select>
 </mapper>

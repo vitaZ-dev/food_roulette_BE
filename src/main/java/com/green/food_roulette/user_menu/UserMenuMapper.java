@@ -1,4 +1,4 @@
-package com.green.food_roulette.p_user_menu;
+package com.green.food_roulette.user_menu;
 
 import org.apache.ibatis.annotations.Mapper;
 
