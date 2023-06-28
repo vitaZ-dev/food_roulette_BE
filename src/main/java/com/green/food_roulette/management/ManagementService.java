@@ -6,6 +6,7 @@ import com.green.food_roulette.management.model.ManagemetSetMonthDto;
 import com.green.food_roulette.payment.model.PaymentMonthListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,15 @@ public class ManagementService {
 
     public List<ManagementMonthVo> getUserManagementList(ManagementMonthDto dto){
         return mapper.getUserManagementList(dto);
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public ManagementMonthVo updUserMonthManagement(ManagemetSetMonthDto dto)throws Exception{
+        int result = mapper.updUserMonthManagement(dto);
+        if (result==0){
+            throw new Exception();
+        }
+        ManagementMonthDto monthDto = new ManagementMonthDto();
+        monthDto.setIuser(dto.getIuser());
+        return mapper.getUserThisMonthManagement(monthDto) ;
     }
 }

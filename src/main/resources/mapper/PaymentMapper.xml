@@ -22,10 +22,10 @@
     </select>
     
     <select id="getUserDetailPayment">
-        SELECT A.ipayment,A.imenu,A.payment_at paymentAt
+        SELECT A.ipayment,C.menu,A.payment_at paymentAt
         ,A.current_menu_price currentMenuPrice,A.review_grade reviewGrade,A.restaurant
         FROM p_payment A
-            INNER JOIN (
+        INNER JOIN (
             SELECT X.imanagement
             FROM p_management X
             INNER JOIN p_user Y
@@ -33,6 +33,15 @@
             WHERE X.iuser=#{iuser}
         ) B
         ON A.imanagement = B.imanagement
+        INNER JOIN(
+            SELECT icommon_menu,menu
+            FROM p_common_menu
+            UNION
+            SELECT iuser_menu,menu
+            FROM p_user_menu A
+
+        )C
+        ON A.imenu=C.icommon_menu
         WHERE DATE(A.payment_at)=#{paymentAt}
         ;
     </select>

@@ -41,4 +41,10 @@ public class ManagementController {
         return service.getUserManagementList(dto);
     }
 
+    @PatchMapping("/roulette")
+    @Operation(summary = "이달의 한도 수정")
+    public ManagementMonthVo patchUserMonthManagement(@RequestBody ManagemetSetMonthDto dto)throws Exception{
+        return service.updUserMonthManagement(dto);
+    }
+
 }
