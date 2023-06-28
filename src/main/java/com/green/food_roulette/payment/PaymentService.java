@@ -1,9 +1,7 @@
 package com.green.food_roulette.payment;
 
-import com.green.food_roulette.payment.model.PaymentDetailDto;
-import com.green.food_roulette.payment.model.PaymentDetailVo;
-import com.green.food_roulette.payment.model.PaymentMonthListDto;
-import com.green.food_roulette.payment.model.PaymentMonthListVo;
+import com.green.food_roulette.management.ManagementMapper;
+import com.green.food_roulette.payment.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentService {
     private final PaymentMapper mapper;
+    private final ManagementMapper managementMapper;
 
 
 
