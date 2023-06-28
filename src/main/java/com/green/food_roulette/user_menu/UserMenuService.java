@@ -1,5 +1,6 @@
 package com.green.food_roulette.user_menu;
 
+import com.green.food_roulette.common_menu.CommonMenuMapper;
 import com.green.food_roulette.user_menu.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,8 @@ public class UserMenuService {
         System.out.println(entity.getActivation());
         mapper.updActivation(entity);
         return entity.getActivation();
+        }
+        public List<MenusVo> getMenus(UserMenuIuserDto dto){
+        return mapper.getMenus(dto);
         }
     }
