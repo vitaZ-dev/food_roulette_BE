@@ -40,4 +40,16 @@
         from p_user_menu
         where iuser_menu=#{iuserMenu}
     </select>
+    <select id="getMenus">
+        SELECT A.iuser_menu iusermenu, A.menu
+        FROM (
+        SELECT iuser_menu,menu
+        FROM p_user_menu
+        WHERE iuser=#{iuser}
+        UNION
+        SELECT  icommon_menu, menu
+        FROM p_common_menu )A
+        GROUP BY A.menu
+        order by A.iuser_menu;
+    </select>
 </mapper>

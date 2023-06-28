@@ -4,6 +4,7 @@ import com.green.food_roulette.user.model.UserInsDto;
 import com.green.food_roulette.user.model.UserIuserDto;
 import com.green.food_roulette.user.model.UserVo;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.zip.ZipException;
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
+@Tag(name = "유저")
 public class UserController {
     private final UserService service;
     @PostMapping
