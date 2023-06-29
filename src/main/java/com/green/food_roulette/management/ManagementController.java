@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/{iuser}")
+@RequestMapping("")
 @RestController
 @Tag(name = "월별 목표")
 @RequiredArgsConstructor
 public class ManagementController {
     private final ManagementService service;
 
-    @PostMapping("/roulette")
+    @PostMapping("/roulette/{iuser}")
     @Operation(summary = "이달의 목표 설정하기")
     public ManagementMonthVo setUserMonthManagement(@RequestBody ManagemetSetMonthDto dto){
        return service.setUserThisMonthManagement(dto);
     }
 
-    @GetMapping("/roulette")
+    @GetMapping("/roulette/{iuser}")
     @Operation(summary = "이달의 목표 불러오기")
     public ManagementMonthVo getUserThisMonthManagement(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();
@@ -33,7 +33,7 @@ public class ManagementController {
         return result;
     }
 
-    @GetMapping("/calculate")
+    @GetMapping("/calculate/{iuser}")
     @Operation(summary = "목표 모두 불러오기")
     public List<ManagementMonthVo> getUserManagementList(@PathVariable Long iuser){
         ManagementMonthDto dto = new ManagementMonthDto();
@@ -41,7 +41,7 @@ public class ManagementController {
         return service.getUserManagementList(dto);
     }
 
-    @PatchMapping("/roulette")
+    @PatchMapping("/roulette/{iuser}")
     @Operation(summary = "이달의 한도 수정")
     public ManagementMonthVo patchUserMonthManagement(@RequestBody ManagemetSetMonthDto dto)throws Exception{
         return service.updUserMonthManagement(dto);

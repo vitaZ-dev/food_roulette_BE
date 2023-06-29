@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{iuser}")
+@RequestMapping("/calendar")
 @Tag(name = "유저 소비내역")
 @RequiredArgsConstructor
 public class PaymentController {
     private final PaymentService service;
 
-    @GetMapping("/calendar")
+    @GetMapping("/{iuser}")
     @Operation(summary = "해당 달의 소비 내역들")
     public List<PaymentMonthListVo> getUserPaymentList(@PathVariable Long iuser,String year,int month){
         PaymentMonthListDto dto = new PaymentMonthListDto();
@@ -33,7 +33,7 @@ public class PaymentController {
         return service.getUserPaymentList(dto);
     }
 
-    @GetMapping("/calender/detail")
+    @GetMapping("/{iuser}/detail")
     @Operation(summary = "해당 일의 소비 내역들 paymentAt ex)yy-mm-dd")
     public List<PaymentDetailVo>getUserDetailPayment(@PathVariable Long iuser,String  paymentAt){
         PaymentDetailDto dto = new PaymentDetailDto();
