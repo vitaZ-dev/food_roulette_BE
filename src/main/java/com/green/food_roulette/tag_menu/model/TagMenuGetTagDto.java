@@ -7,5 +7,7 @@ import java.util.List;
 @Data
 public class TagMenuGetTagDto {
     private int size;
-    private List<Long> itag;
+    private Long itag;
+    private List<Long> list;
+
 }

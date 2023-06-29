@@ -15,7 +15,6 @@ public class TagMenuController {
 
     @PostMapping("/menus/tag")
     public List<TagMenuGetTagVo> getTagMenu(@RequestBody TagMenuGetTagDto dto){
-
         return service.getTagMenu(dto);
     }
 }

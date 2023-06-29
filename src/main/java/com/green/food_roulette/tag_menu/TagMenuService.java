@@ -13,7 +13,7 @@ public class TagMenuService {
     private final TagMenuMapper mapper;
 
     public List<TagMenuGetTagVo> getTagMenu(TagMenuGetTagDto dto){
-        int size = dto.getItag().size();
+        int size = dto.getList().size();
         dto.setSize(size);
 
         return mapper.getTagMenu(dto);
