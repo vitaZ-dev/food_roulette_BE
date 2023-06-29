@@ -19,15 +19,15 @@ import java.util.zip.ZipException;
 public class UserController {
     private final UserService service;
     @PostMapping
-    @Operation(summary ="유저생성" )
+    @Operation(summary ="유저생성" ,description = "name=유저 이름이나 닉네임 입력 없으면 가입하고 있으면 있는 user id 리턴")
     public UserVo postUser(@RequestBody UserInsDto dto){
         return service.postUser(dto);
     }
-    @GetMapping("/{iuser}")
-    @Operation(summary = "유저 불러오기")
-    public UserVo getUser(@PathVariable Long iuser){
-        UserIuserDto dto = new UserIuserDto();
-        dto.setIuser(iuser);
-        return service.getUser(dto);
-    }
+//    @GetMapping("/{iuser}")
+//    @Operation(summary = "유저 불러오기")
+//    public UserVo getUser(@PathVariable Long iuser){
+//        UserIuserDto dto = new UserIuserDto();
+//        dto.setIuser(iuser);
+//        return service.getUser(dto);
+//    }
 }

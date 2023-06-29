@@ -13,15 +13,16 @@ import java.util.List;
 import java.util.zip.ZipException;
 
 @RestController
-@RequestMapping("/menus/{iuser}")
+@RequestMapping("/menu/{iuser}")
 @Tag(name = "메뉴")
 @RequiredArgsConstructor
 public class UserMenuController {
     private final UserMenuService service;
     private final CommonMenuService commonMenuService;
 
-    @PostMapping("/insmenu")
-    @Operation(summary = "유저 메뉴 생성")
+    @PostMapping
+    @Operation(summary = "유저 메뉴 생성",description = "iuser=유저 id" +
+            " menu = 메뉴이름")
     public UserMenuVo postUserMenu(@RequestBody UserMenuInsDto dto) throws ZipException{
         return service.postUserMenu(dto);
     }
@@ -40,9 +41,11 @@ public class UserMenuController {
 //        return service.getActivationUserMenu(dto);
     // 활성화된 유저메뉴 불러오기
 //    }
-    @PatchMapping("/onoff")
-    @Operation(summary = "메뉴 활성화 풀기")
-    public int updActivation(@RequestBody UserMenuIuserMenuDto dto){
+    @DeleteMapping
+    @Operation(summary = "메뉴 삭제" ,description = "삭제할 메뉴의 id값")
+    public int updActivation(@RequestParam Long iuserMenu ){
+        UserMenuIuserMenuDto dto = new UserMenuIuserMenuDto();
+        dto.setIuserMenu(iuserMenu);
         return service.updActivation(dto);
     }
      @GetMapping("/common")
@@ -50,8 +53,8 @@ public class UserMenuController {
         public List<CommonMenuVo> getCommonMenu(){
          return commonMenuService.getCommonMenu();
    }
-   @GetMapping("/menus")
-    @Operation(summary = "메뉴리스트")
+   @GetMapping
+    @Operation(summary = "메뉴리스트",description = "iuser= 유저 id")
     public List<MenusVo> getMenus(@PathVariable Long iuser){
        UserMenuIuserDto dto = new UserMenuIuserDto();
        dto.setIuser(iuser);

@@ -24,7 +24,9 @@ public class PaymentController {
     private final PaymentService service;
 
     @GetMapping("/{iuser}")
-    @Operation(summary = "해당 달의 소비 내역들")
+    @Operation(summary = "해당 달의 소비 내역들",description = "iuser=유저id" +
+            "year = yy" +
+            "month= mm")
     public List<PaymentMonthListVo> getUserPaymentList(@PathVariable Long iuser,String year,int month){
         PaymentMonthListDto dto = new PaymentMonthListDto();
         dto.setIuser(iuser);
@@ -34,7 +36,8 @@ public class PaymentController {
     }
 
     @GetMapping("/{iuser}/detail")
-    @Operation(summary = "해당 일의 소비 내역들 paymentAt ex)yy-mm-dd")
+    @Operation(summary = "해당 일의 소비 내역들 ",description = "paymentAt ex)yy-mm-dd 날자정보" +
+            "iuser= 유저 id")
     public List<PaymentDetailVo>getUserDetailPayment(@PathVariable Long iuser,String  paymentAt){
         PaymentDetailDto dto = new PaymentDetailDto();
         dto.setIuser(iuser);
