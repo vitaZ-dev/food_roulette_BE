@@ -50,6 +50,21 @@
         WHERE DATE(A.payment_at)=#{paymentAt}
         ;
     </select>
+    
+    <select id="getThisMonthPaymet">
+        SELECT x.month_limit monthLimit,SUM(y.current_menu_price) sum
+        FROM p_management x
+        INNER JOIN p_payment y
+        ON x.imanagement=y.imanagement
+        WHERE x.iuser=#{iuser} AND x.year=YEAR(NOW()) AND x.month=MONTH(NOW())
+    </select>
+    
+    <update id="reviewPayment">
+        update p_payment
+        set current_menu_price=#{currentMenuPrice}
+        ,review_grade=#{reviewGrade}
+        ,restaurant=#{restaurant}
+    </update>
 
 
 

@@ -10,4 +10,6 @@ public interface PaymentMapper {
     int insUserPayment(PaymentEntity entity);
     List<PaymentMonthListVo>getUserPaymentList(PaymentMonthListDto dto);
     List<PaymentDetailVo>getUserDetailPayment(PaymentDetailDto dto);
+    int reviewPayment(PaymentReviewDto dto);
+   PaymentGetMonthVo getThisMonthPaymet(PaymentReviewDto dto);
 }

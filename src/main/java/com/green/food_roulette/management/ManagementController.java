@@ -18,7 +18,7 @@ import java.util.List;
 public class ManagementController {
     private final ManagementService service;
 
-    @PostMapping("/main/{iuser}")
+    @PostMapping("/main/{iuser}/plan")
     @Operation(summary = "이달의 목표 설정하기",description = "iuser=유저 pk" +
             "   monthLimit= 원하는 한도"  )
     public ManagementMonthVo setUserMonthManagement(@RequestBody ManagemetSetMonthDto dto){
