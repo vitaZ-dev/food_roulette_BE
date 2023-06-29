@@ -45,11 +45,11 @@
         FROM (
         SELECT iuser_menu,menu
         FROM p_user_menu
-        WHERE iuser=#{iuser}
+        WHERE iuser=#{iuser} and activation=0
         UNION
         SELECT  icommon_menu, menu
         FROM p_common_menu )A
         GROUP BY A.menu
-        order by A.iuser_menu;
+        order by A.iuser_menu
     </select>
 </mapper>
