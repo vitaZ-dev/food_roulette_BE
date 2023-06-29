@@ -12,6 +12,7 @@
                         UNION
                         SELECT iuser_menu,menu
                         FROM p_user_menu A
+
                 )B
                 ON A.imenu=B.icommon_menu
                 INNER JOIN p_tag C
@@ -19,21 +20,27 @@
                 WHERE B.menu=#{menu}
         </select>
 
-        <select id="getTagMenu">
-                SELECT  A.itag,A.imenu,B.menu  ,COUNT(*)
-                from p_tag_menu A
+        <select id="getTagMenu" resultType="TagMenuGetTagVo">
+                SELECT  A.itag itag,A.imenu imenu,B.menu menu ,COUNT(*)
+                from (
+                        SELECT X.itag,X.imenu,Y.tag
+                        FROM p_tag_menu X
+                        INNER JOIN p_tag Y
+                        ON X.itag=Y.itag
+                )  A
                 INNER JOIN (
-                        SELECT icommon_menu ,menu
+                        SELECT icommon_menu,menu
                         FROM p_common_menu
                         UNION
-                        SELECT iuser_menu ,menu
+                        SELECT iuser_menu,menu
                         FROM p_user_menu
+                        WHERE iuser=#{iuser} and activation=0
                 ) B
                 ON A.imenu=B.icommon_menu
-                WHERE A.itag
+                WHERE A.tag
                         IN
                 <foreach collection="list" item="item" open="(" separator="," close=")">
-                        #{item.itag}
+                        #{item.tag}
                 </foreach>
                 GROUP BY A.imenu
                 HAVING COUNT(*)>=#{size}
