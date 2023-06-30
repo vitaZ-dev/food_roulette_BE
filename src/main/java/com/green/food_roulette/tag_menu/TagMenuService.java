@@ -15,13 +15,13 @@ import java.util.List;
 public class TagMenuService {
     private final TagMenuMapper mapper;
 
-    public List<TagMenuGetTagVo> getTagMenu(List<String >list,Long iuser){
+    public List<TagMenuGetTagVo> getTagMenu(List<String>list,Long iuser){
         List<TagEntity> arrayList = new ArrayList<>();
-
+        if (list.size()==0){return null;}
 
         for (String tag : list) {
             TagEntity entity = new TagEntity();
-            entity.setTag(tag);
+            entity.setTag(tag.replaceAll("\\s",""));
             arrayList.add(entity);
         }
         TagMenuGetTagDto dto = new TagMenuGetTagDto();
