@@ -9,7 +9,7 @@
         ,menu=#{menu}
     </insert>
 
-    <select id="findUserMenu">
+    <select id="findUserMenu" resultType="Long">
         select iuser_menu iuserMenu
         from p_user_menu
         where menu=#{menu} and iuser=#{iuser}

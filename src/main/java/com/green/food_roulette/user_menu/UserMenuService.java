@@ -1,11 +1,16 @@
 package com.green.food_roulette.user_menu;
 
 import com.green.food_roulette.common_menu.CommonMenuMapper;
+import com.green.food_roulette.tag.TagMapper;
+import com.green.food_roulette.tag.model.TagEntity;
+import com.green.food_roulette.tag_menu.TagMenuMapper;
+import com.green.food_roulette.tag_menu.model.TagMenuEntity;
 import com.green.food_roulette.user_menu.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipException;
 
@@ -13,18 +18,39 @@ import java.util.zip.ZipException;
 @RequiredArgsConstructor
 public class UserMenuService {
     private final UserMenuMapper mapper;
-
+    private final TagMapper tagMapper;
+    private final TagMenuMapper tagMenuMapper;
     @Transactional(rollbackFor = ZipException.class)
-    public UserMenuVo postUserMenu(UserMenuInsDto dto) throws ZipException{
+    public int postUserMenu(UserMenuInsDto dto,List<String>tags) throws ZipException{
         UserMenuEntity entity = new UserMenuEntity();
-        entity.setIuser(dto.getIuser());
         entity.setMenu(dto.getMenu());
-        Long result = mapper.findUserMenu(entity);
-        if (result == null){
-            mapper.insUserMenu(entity);
-            return mapper.selUserMenu(entity.getIuserMenu());
-        }
+        entity.setIuser(dto.getIuser());
+        Long userMenu = mapper.findUserMenu(entity);
+        if (userMenu!=null){
             throw new ZipException();
+
+        }
+        mapper.insUserMenu(entity);
+        userMenu=entity.getIuserMenu();
+
+
+        List<TagMenuEntity>itags=new ArrayList<>();
+        for (int i = 0; i < tags.size(); i++) {
+            TagMenuEntity  tagMenuEntity= new TagMenuEntity();
+            TagEntity tagEntity = new TagEntity();
+            tagMenuEntity.setImenu(userMenu);
+            tagEntity.setTag(tags.get(i));
+            Long itag = tagMapper.findTag(tagEntity);
+            if (itag==null){
+                tagMapper.insTag(tagEntity);
+                itag=tagEntity.getItag();
+            }
+            tagMenuEntity.setItag(itag);
+            itags.add(tagMenuEntity);
+        }
+
+        return tagMenuMapper.joinTagMenu(itags);
+
     }
     public List<UserMenuVo> getUserMenu(UserMenuIuserDto dto){
         return mapper.getUserMenu(dto);

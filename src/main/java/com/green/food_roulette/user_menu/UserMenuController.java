@@ -23,8 +23,14 @@ public class UserMenuController {
     @PostMapping
     @Operation(summary = "유저 메뉴 생성",description = "iuser=유저 id" +
             " menu = 메뉴이름")
-    public UserMenuVo postUserMenu(@RequestBody UserMenuInsDto dto) throws ZipException{
-        return service.postUserMenu(dto);
+    public int postUserMenu(@RequestBody UserMenuInsDto dto,@RequestParam List<String> tags) {
+
+        try {
+            return service.postUserMenu(dto,tags);
+        } catch (ZipException e) {
+            return -1;
+        }
+
     }
     @GetMapping("/user")
     @Operation(summary = "유저 메뉴 불러오기")
