@@ -12,4 +12,13 @@
         from p_tag
         where tag=#{tag}
     </select>
+    <insert id="insMenuTag">
+        insert into p_tag_menu
+        set menu=#{menu}
+        ,tag=#{tag}
+        <foreach collection="list" item="item" open=" (" separator="," close=")">
+            #{item.tag}
+            
+        </foreach>
+    </insert>
 </mapper>

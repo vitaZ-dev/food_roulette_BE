@@ -6,5 +6,6 @@
     <select id="getCommonMenu">
         select icommon_menu icommonmenu, menu
         from p_common_menu
+        order by icommon_menu
     </select>
 </mapper>
