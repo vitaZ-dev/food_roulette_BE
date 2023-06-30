@@ -1,10 +1,13 @@
 package com.green.food_roulette.management;
 
+import com.green.food_roulette.management.model.ManagementCalculateVo;
 import com.green.food_roulette.management.model.ManagementMonthDto;
 import com.green.food_roulette.management.model.ManagementMonthVo;
 import com.green.food_roulette.management.model.ManagemetSetMonthDto;
 import com.green.food_roulette.payment.model.PaymentMonthListDto;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +37,7 @@ public class ManagementService {
     public List<ManagementMonthVo> getUserManagementList(ManagementMonthDto dto){
         return mapper.getUserManagementList(dto);
     }
+
     @Transactional(rollbackFor = Exception.class)
     public ManagementMonthVo updUserMonthManagement(ManagemetSetMonthDto dto)throws Exception{
         int result = mapper.updUserMonthManagement(dto);
@@ -43,5 +47,11 @@ public class ManagementService {
         ManagementMonthDto monthDto = new ManagementMonthDto();
         monthDto.setIuser(dto.getIuser());
         return mapper.getUserThisMonthManagement(monthDto) ;
+    }
+
+  @Scheduled(cron = "0 48 16 30 6 ?")
+    public void calculateUserManagement(){
+        List<ManagementCalculateVo> calculateVos = mapper.monthTotalPayment();
+        mapper.monthCalculate(calculateVos);
     }
 }

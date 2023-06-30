@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping
+@RequestMapping("/api")
 @RestController
 @Tag(name = "월별 목표")
 @RequiredArgsConstructor
@@ -47,5 +47,7 @@ public class ManagementController {
     public ManagementMonthVo patchUserMonthManagement(@RequestBody ManagemetSetMonthDto dto)throws Exception{
         return service.updUserMonthManagement(dto);
     }
+
+
 
 }

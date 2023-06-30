@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 @Tag(name = "유저 소비내역")
 @RequiredArgsConstructor
 public class PaymentController {
@@ -47,6 +47,12 @@ public class PaymentController {
 
     }
     @PatchMapping("/calendar/{iuser}/detail")
+    @Operation(summary = "후기 작성",description = "유저 id" +
+            "  ipayment=리뷰 id값" +
+            " currentmenupirce= 먹은 가격" +
+            "review= 페페 스코어 1~3으로만 받기 가능" +
+            " restaurant =먹은 장소" +
+            " 리턴으로 1이 오면 정상 등록 -1이면 한도초과")
     public int reviewPayment(@RequestBody PaymentReviewDto dto){
         try {
             return service.reviewPayment(dto);

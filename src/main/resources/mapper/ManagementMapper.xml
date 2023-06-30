@@ -13,12 +13,12 @@
     </insert>
 
     <select id="getUserThisMonthManagement">
-        select imanagement, year,month,month_limit monthLimit
-                ,balance,expense
-        from p_management
-        where iuser = #{iuser}
-            and year = year(current_timestamp())
-            and month = month(current_timestamp())
+        SELECT A.imanagement,A.year,A.month,A.month_limit monthLimit
+        ,ifnull(A.month_limit - sum(B.current_menu_price),0)balance ,ifnull(sum(B.current_menu_price) ,0)expense
+        FROM p_management A
+        INNER JOIN p_payment B
+        ON A.imanagement=B.imanagement
+        WHERE A.iuser=#{iuser} and A.YEAR=YEAR(NOW()) AND A.MONTH=MONTH(NOW())
     </select>
 
     <select id="getUserManagementList">
@@ -28,6 +28,13 @@
         where iuser = #{iuser}
         order by year,month
     </select>
+
+    <select id="monthTotalPayment">
+        SELECT imanagement,sum(current_menu_price) total
+        FROM p_payment
+        WHERE month(payment_at)=MONTH(NOW())
+        GROUP BY imanagement
+    </select>
     
     <update id="updUserMonthManagement">
         update  p_management
@@ -36,4 +43,17 @@
         ,balance= balance + #{monthLimit}
         where iuser=#{iuser} and year=year(current_timestamp()) and month = month(current_timestamp())
     </update>
+
+    <update id="monthCalculate">
+        <foreach collection="list" item="item" separator=";" >
+            update p_management
+            set balance= balance-#{item.total}
+            ,expense=expense+#{item.total}
+            where imanagement=#{item.imanagement}
+        </foreach>
+
+
+    </update>
+
+
 </mapper>
