@@ -46,4 +46,14 @@ public class PaymentController {
         return service.getUserDetailPayment(dto);
 
     }
+    @PatchMapping("/calendar/{iuser}/detail")
+    public int reviewPayment(@RequestBody PaymentReviewDto dto){
+        try {
+            return service.reviewPayment(dto);
+        } catch (Exception e) {
+            return -1;
+        }
+
+
+    }
 }

@@ -64,6 +64,7 @@
         set current_menu_price=#{currentMenuPrice}
         ,review_grade=#{reviewGrade}
         ,restaurant=#{restaurant}
+        where ipayment=#{ipayment}
     </update>
 
 
