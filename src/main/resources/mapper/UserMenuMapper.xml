@@ -14,7 +14,6 @@
         from p_user_menu
         where menu=#{menu} and iuser=#{iuser}
     </select>
-
     <select id="selUserMenu">
         select iuser_menu iuserMenu, menu,iuser,activation
         from p_user_menu

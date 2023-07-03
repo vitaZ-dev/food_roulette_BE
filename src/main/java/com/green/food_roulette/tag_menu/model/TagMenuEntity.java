@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class TagMenuEntity {
+    private String tag;
     private Long itag;
     private Long imenu;
 }

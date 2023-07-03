@@ -6,4 +6,5 @@ import lombok.Data;
 public class UserMenuInsDto {
     private Long iuser;
     private String menu;
+    private String tag;
 }
