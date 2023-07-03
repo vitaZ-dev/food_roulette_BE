@@ -52,11 +52,9 @@
     </select>
     
     <select id="getThisMonthPaymet">
-        SELECT x.month_limit monthLimit,SUM(y.current_menu_price) sum
-        FROM p_management x
-        INNER JOIN p_payment y
-        ON x.imanagement=y.imanagement
-        WHERE x.iuser=#{iuser} AND x.year=YEAR(NOW()) AND x.month=MONTH(NOW())
+        SELECT month_limit monthLimit, balance
+        FROM p_management
+        WHERE iuser=#{iuser} AND year=#{year} and month=#{month}
     </select>
     
     <update id="reviewPayment">

@@ -40,8 +40,11 @@ public class ManagementService {
        }
     }
 
-    public List<ManagementMonthVo> getUserManagementList(ManagementMonthDto dto){
-        return mapper.getUserManagementList(dto);
+    public ManagementRes getUserManagementList(ManagementEntity entity){
+        ManagementMonthVo userManagementList = mapper.getUserManagementList(entity);
+        List<ManagementPaymentVo> userMonthPaymentList = mapper.getUserMonthPaymentList(entity);
+        ManagementRes build = ManagementRes.builder().paymentVoList(userMonthPaymentList).management(userManagementList).build();
+        return build;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -54,9 +57,5 @@ public class ManagementService {
         return mapper.getUserThisMonthManagement(entity) ;
     }
 
-    @Scheduled(cron = "0 50 23 L * ?")
-    public void calculateUserManagement(){
-        List<ManagementCalculateVo> calculateVos = mapper.monthTotalPayment();
-        mapper.monthCalculate(calculateVos);
-    }
+
 }

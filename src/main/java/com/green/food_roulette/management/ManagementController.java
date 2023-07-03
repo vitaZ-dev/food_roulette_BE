@@ -1,9 +1,6 @@
 package com.green.food_roulette.management;
 
-import com.green.food_roulette.management.model.ManagementEntity;
-import com.green.food_roulette.management.model.ManagementMonthDto;
-import com.green.food_roulette.management.model.ManagementMonthVo;
-import com.green.food_roulette.management.model.ManagemetSetMonthDto;
+import com.green.food_roulette.management.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
@@ -43,11 +40,13 @@ public class ManagementController {
     }
 
     @GetMapping("/calculate/{iuser}")
-    @Operation(summary = "이번달을 제외한 목표 불러오기",description = "iuser=유저 id")
-    public List<ManagementMonthVo> getUserManagementList(@PathVariable Long iuser){
-        ManagementMonthDto dto = new ManagementMonthDto();
-        dto.setIuser(iuser);
-        return service.getUserManagementList(dto);
+    @Operation(summary = "선택한 달의 목표와 소비내역",description = "iuser=유저 id,")
+    public ManagementRes getUserManagementList(@PathVariable Long iuser, @RequestParam int month,@RequestParam String year){
+        ManagementEntity entity = new ManagementEntity();
+        entity.setIuser(iuser);
+        entity.setMonth(month);
+        entity.setYear(year);
+        return service.getUserManagementList(entity);
     }
 
     @PatchMapping("/main/{iuser}")

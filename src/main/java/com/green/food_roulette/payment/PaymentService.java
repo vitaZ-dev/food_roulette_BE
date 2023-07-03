@@ -33,15 +33,24 @@ public class PaymentService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public int reviewPayment(PaymentReviewDto dto)throws Exception{
-        PaymentGetMonthVo thisMonthPaymet = mapper.getThisMonthPaymet(dto);
-        int monthLimit = thisMonthPaymet.getMonthLimit();
-        int sum = thisMonthPaymet.getSum();
+    public int reviewPayment(PaymentReviewDto dto,Long iuser)throws Exception{
+        PaymentCalDto calDto = new PaymentCalDto();
+        calDto.setIuser(iuser);
+        calDto.setYear(dto.getYear());
+        calDto.setMonth(dto.getMonth());
+        calDto.setCruuntMenuPrice(dto.getCurrentMenuPrice());
+        PaymentGetMonthVo thisMonthPaymet = mapper.getThisMonthPaymet(calDto);
 
-        if (monthLimit<sum+dto.getCurrentMenuPrice()){
+        int balance = thisMonthPaymet.getBalance();
+
+        if (balance - dto.getCurrentMenuPrice() < 0){
+
             throw new Exception();
         }
-       return mapper.reviewPayment(dto);
+         mapper.reviewPayment(dto);
+       return managementMapper.calculateManagement(calDto);
+
+
 
     }
 }
