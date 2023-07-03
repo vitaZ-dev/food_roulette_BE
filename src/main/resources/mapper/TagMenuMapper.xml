@@ -56,6 +56,13 @@
                 GROUP BY A.imenu
                 HAVING COUNT(*)>=#{size}
         </select>
+        <delete id="delMenuTag">
+                delete from A
+                Using p_tag_menu A
+                left join p_user_menu B
+                on A.imenu = B.iuser_menu
+                where B.iuser=#{iuser} and B.iuser_menu = #{iuserMenu}
+        </delete>
 
 
 </mapper>

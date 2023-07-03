@@ -9,8 +9,8 @@
         ,menu=#{menu}
     </insert>
 
-    <select id="findUserMenu" resultType="Long">
-        select iuser_menu iuserMenu
+    <select id="findUserMenu" resultType="UserMenuFindVo">
+        select iuser_menu iuserMenu, activation
         from p_user_menu
         where menu=#{menu} and iuser=#{iuser}
     </select>

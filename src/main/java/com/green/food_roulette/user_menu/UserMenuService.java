@@ -4,6 +4,7 @@ import com.green.food_roulette.common_menu.CommonMenuMapper;
 import com.green.food_roulette.tag.TagMapper;
 import com.green.food_roulette.tag.model.TagEntity;
 import com.green.food_roulette.tag_menu.TagMenuMapper;
+import com.green.food_roulette.tag_menu.model.MenuDto;
 import com.green.food_roulette.tag_menu.model.TagMenuEntity;
 import com.green.food_roulette.user_menu.model.*;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,6 @@ public class UserMenuService {
         Long userMenu = mapper.findUserMenu(entity);
         if (userMenu!=null){
             throw new ZipException();
-
         }
         mapper.insUserMenu(entity);
         userMenu=entity.getIuserMenu();
@@ -73,5 +73,13 @@ public class UserMenuService {
         }
         public List<MenusVo> getMenus(UserMenuIuserDto dto){
         return mapper.getMenus(dto);
+        }
+        public Long delMenuTag(UserMenuEntity entity){
+            int result = mapper.findActivation(entity);
+            if (result ==0){
+                entity.setActivation(1);
+                mapper.updActivation(entity);
+            }
+            return tagMenuMapper.delMenuTag(entity);
         }
     }
