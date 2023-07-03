@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TagMenuGetTagVo {
-    private Long itag;
+
     private Long imenu;
     private String menu;
 }

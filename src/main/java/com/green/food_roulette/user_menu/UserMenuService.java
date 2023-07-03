@@ -53,9 +53,9 @@ public class UserMenuService {
             }
             return tagMenuMapper.joinTagMenu(itags);
         }
-    public List<UserMenuRes> getUserMenu(UserMenuIuserDto dto){
-        List<UserMenuVo> userMenu = mapper.getUserMenu(dto);
-        return null;// 해결 필요
+    public List<UserMenuVo> getUserMenu(UserMenuIuserDto dto){
+
+        return  mapper.getUserMenu(dto);
     }
     public List<UserMenuVo> getActivationUserMenu(UserMenuIuserDto dto){
         return mapper.getActivationUserMenu(dto);
@@ -73,8 +73,35 @@ public class UserMenuService {
         mapper.updActivation(entity);
         return entity.getActivation();
         }
-        public List<MenusVo> getMenus(UserMenuIuserDto dto){
-        return mapper.getMenus(dto);
+        public List<UserMenuRes> getMenus(UserMenuIuserDto dto){
+            List<MenusVo> menus = mapper.getMenus(dto);
+            List<UserMenuRes>userMenuList= new ArrayList<>();
+            UserMenuRes userMenuRes ;
+            UserMenuResm userMenuResm;
+            List<UserMenuResm>tagList ;
+            for (int i = 0; i < menus.size(); i++) {
+               userMenuRes = new UserMenuRes();
+              userMenuRes.setIuserMenu(menus.get(i).getIusermenu());
+               userMenuRes.setMenu(menus.get(i).getMenu());
+
+                String tags = menus.get(i).getTags();
+                String itags = menus.get(i).getItags();
+                String[] tagSplit = tags.split(",");
+                String[] itagSplit = itags.split(",");
+
+
+                tagList=new ArrayList<>();
+                for (int j = 0; j < tagSplit.length; j++) {
+                    userMenuResm=new UserMenuResm();
+                    userMenuResm.setTag(tagSplit[j]);
+                    userMenuResm.setItag(Long.valueOf(itagSplit[j]));
+                    tagList.add(userMenuResm);
+                }
+                userMenuRes.setTags(tagList);
+                userMenuList.add(userMenuRes);
+
+            }
+            return userMenuList;
         }
         public Long delMenuTag(UserMenuEntity entity){
             int result = mapper.findActivation(entity);

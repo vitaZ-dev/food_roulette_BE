@@ -8,4 +8,6 @@ import lombok.Getter;
 public class MenusVo {
     private Long iusermenu;
     private String menu;
+    private String tags;
+    private String itags;
 }

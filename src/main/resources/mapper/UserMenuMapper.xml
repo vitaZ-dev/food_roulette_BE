@@ -40,13 +40,13 @@
         where iuser_menu=#{iuserMenu}
     </select>
     <select id="getMenus">
-        SELECT B.iuser_menu iuserMenu,B.menu,A.itag,A.tag
+        SELECT B.iuser_menu iusermenu,B.menu, GROUP_CONCAT(A.tag) AS tags,GROUP_CONCAT(A.itag) AS itags
         FROM (
-        SELECT x.itag,x.imenu,y.tag
+        SELECT x.imenu, x.itag, y.tag
         FROM p_tag_menu x
         INNER JOIN p_tag y
-        ON x.itag=y.itag
-        )A
+        ON x.itag = y.itag
+        ) A
         INNER JOIN (
         SELECT iuser_menu,menu
         FROM p_user_menu
@@ -55,7 +55,7 @@
         SELECT icommon_menu,menu
         FROM p_common_menu
         )B
-        on A.imenu=B.iuser_menu
-        ORDER BY imenu
+        ON A.imenu=B.iuser_menu
+        GROUP BY A.imenu
     </select>
 </mapper>
