@@ -8,4 +8,5 @@ public class UserMenuEntity {
     private Long iuser;
     private String menu;
     private int activation;
+    private String arr;
 }

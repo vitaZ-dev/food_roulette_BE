@@ -3,6 +3,7 @@ package com.green.food_roulette.user_menu;
 import com.green.food_roulette.common_menu.CommonMenuService;
 import com.green.food_roulette.common_menu.model.CommonMenuEntity;
 import com.green.food_roulette.common_menu.model.CommonMenuVo;
+import com.green.food_roulette.tag_menu.model.MenuDto;
 import com.green.food_roulette.user_menu.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -65,5 +66,13 @@ public class UserMenuController {
        UserMenuIuserDto dto = new UserMenuIuserDto();
        dto.setIuser(iuser);
        return service.getMenus(dto);
+   }
+   @PutMapping("/Tag")
+   @Operation
+    public Long delMenuTag(@PathVariable Long iuser, @RequestParam Long iuserMenu){
+       UserMenuEntity entity = new UserMenuEntity();
+       entity.setIuser(iuser);
+       entity.setIuserMenu(iuserMenu);
+       return service.delMenuTag(entity);
    }
 }
