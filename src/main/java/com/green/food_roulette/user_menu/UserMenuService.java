@@ -22,36 +22,37 @@ public class UserMenuService {
     private final TagMapper tagMapper;
     private final TagMenuMapper tagMenuMapper;
     @Transactional(rollbackFor = ZipException.class)
-    public int postUserMenu(UserMenuInsDto dto,List<String>tags) throws ZipException{
+    public int postUserMenu(UserMenuInsDto dto,List<String>tags) throws ZipException {
         UserMenuEntity entity = new UserMenuEntity();
         entity.setMenu(dto.getMenu());
         entity.setIuser(dto.getIuser());
-        Long userMenu = mapper.findUserMenu(entity);
-        if (userMenu!=null){
+        UserMenuFindVo userMenu = mapper.findUserMenu(entity);
+        if (userMenu ==null){
+            mapper.insUserMenu(entity);
+        } else if (userMenu.getIuserMenu()!= null &&userMenu.getActivation() == 1) {
+            entity.setActivation(0);
+            entity.setIuserMenu(userMenu.getIuserMenu());
+            mapper.updActivation(entity);
+
+        } else if (userMenu.getIuserMenu() != null && userMenu.getActivation() == 0) {
             throw new ZipException();
         }
-        mapper.insUserMenu(entity);
-        userMenu=entity.getIuserMenu();
-
-
-        List<TagMenuEntity>itags=new ArrayList<>();
-        for (int i = 0; i < tags.size(); i++) {
-            TagMenuEntity  tagMenuEntity= new TagMenuEntity();
-            TagEntity tagEntity = new TagEntity();
-            tagMenuEntity.setImenu(userMenu);
-            tagEntity.setTag(tags.get(i));
-            Long itag = tagMapper.findTag(tagEntity);
-            if (itag==null){
-                tagMapper.insTag(tagEntity);
-                itag=tagEntity.getItag();
+            List<TagMenuEntity> itags = new ArrayList<>();
+            for (int i = 0; i < tags.size(); i++) {
+                TagMenuEntity tagMenuEntity = new TagMenuEntity();
+                TagEntity tagEntity = new TagEntity();
+                tagMenuEntity.setImenu(userMenu.getIuserMenu());
+                tagEntity.setTag(tags.get(i));
+                Long itag = tagMapper.findTag(tagEntity);
+                if (itag == null) {
+                    tagMapper.insTag(tagEntity);
+                    itag = tagEntity.getItag();
+                }
+                tagMenuEntity.setItag(itag);
+                itags.add(tagMenuEntity);
             }
-            tagMenuEntity.setItag(itag);
-            itags.add(tagMenuEntity);
+            return tagMenuMapper.joinTagMenu(itags);
         }
-
-        return tagMenuMapper.joinTagMenu(itags);
-
-    }
     public List<UserMenuVo> getUserMenu(UserMenuIuserDto dto){
         return mapper.getUserMenu(dto);
     }
