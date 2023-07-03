@@ -18,7 +18,7 @@
         FROM p_management A
         INNER JOIN p_payment B
         ON A.imanagement=B.imanagement
-        WHERE A.iuser=2 and A.YEAR=YEAR(NOW()) AND A.MONTH=MONTH(NOW())
+        WHERE A.iuser=#{iuser} and A.YEAR=YEAR(NOW()) AND A.MONTH=MONTH(NOW())
     </select>
 
     <select id="getUserManagementList">
