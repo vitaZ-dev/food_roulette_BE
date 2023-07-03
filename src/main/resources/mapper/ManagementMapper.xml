@@ -13,20 +13,33 @@
     </insert>
 
     <select id="getUserThisMonthManagement">
-        SELECT A.imanagement,A.year,A.month,A.month_limit monthLimit
-        ,ifnull(A.month_limit - sum(B.current_menu_price),A.month_limit)balance ,ifnull(sum(B.current_menu_price) ,0)expense
-        FROM p_management A
-        INNER JOIN p_payment B
-        ON A.imanagement=B.imanagement
-        WHERE A.iuser=#{iuser} and A.YEAR=YEAR(NOW()) AND A.MONTH=MONTH(NOW())
+        SELECT imanagement,year,month,month_limit monthLimit
+        ,balance ,expense
+        FROM p_management
+        WHERE iuser=#{iuser} and YEAR=YEAR(NOW()) AND MONTH=MONTH(NOW())
     </select>
 
     <select id="getUserManagementList">
         select imanagement, year,month,month_limit monthLimit
         ,balance,expense
         from p_management
-        WHERE iuser = #{iuser}   AND (year &lt; year (now()) OR (year = YEAR(CURRENT_DATE) AND month &lt; MONTH(CURRENT_DATE)))
-        order by year,month
+        WHERE iuser = #{iuser}  AND YEAR=YEAR(NOW()) AND MONTH=#{month}
+
+    </select>
+    <select id="getUserMonthPaymentList">
+        SELECT B.menu,sum(A.current_menu_price) sum
+        FROM p_payment A
+        INNER JOIN  (
+        SELECT iuser_menu,menu
+        FROM p_user_menu
+        WHERE iuser=#{iuser}
+        UNION
+        SELECT  icommon_menu, menu
+        FROM p_common_menu
+        )B
+        ON A.imenu=B.iuser_menu
+        WHERE month(A.payment_at)=#{month} and year(A.payment_at)= #{year}
+        GROUP BY B.menu;
     </select>
 
     <select id="monthTotalPayment">
@@ -44,16 +57,12 @@
         where iuser=#{iuser} and year=year(current_timestamp()) and month = month(current_timestamp())
     </update>
 
-    <update id="monthCalculate">
-        <foreach collection="list" item="item" separator=";" >
-            update p_management
-            set balance= balance-#{item.total}
-            ,expense=expense+#{item.total}
-            where imanagement=#{item.imanagement}
-        </foreach>
-
-
-    </update>
+  <update id="calculateManagement">
+      update p_management
+      set balance=balance-#{cruuntMenuPrice}
+      ,expense=expense+#{cruuntMenuPrice}
+      where iuser=#{iuser} and year=#{year} and month=#{month}
+  </update>
 
 
 </mapper>

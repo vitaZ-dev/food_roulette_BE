@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PaymentGetMonthVo {
     private int monthLimit;
-    private int sum;
+    private int balance;
 }
