@@ -8,6 +8,6 @@ import lombok.Getter;
 public class UserMenuVo {
     private Long iuserMenu;
     private String menu;
-    private Long iuser;
-    private int activation;
+    private Long itag;
+    private String tag;
 }

@@ -53,8 +53,9 @@ public class UserMenuService {
             }
             return tagMenuMapper.joinTagMenu(itags);
         }
-    public List<UserMenuVo> getUserMenu(UserMenuIuserDto dto){
-        return mapper.getUserMenu(dto);
+    public List<UserMenuRes> getUserMenu(UserMenuIuserDto dto){
+        List<UserMenuVo> userMenu = mapper.getUserMenu(dto);
+        return null;// 해결 필요
     }
     public List<UserMenuVo> getActivationUserMenu(UserMenuIuserDto dto){
         return mapper.getActivationUserMenu(dto);
