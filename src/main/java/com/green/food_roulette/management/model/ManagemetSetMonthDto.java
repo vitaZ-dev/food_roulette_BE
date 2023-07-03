@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class ManagemetSetMonthDto {
-    private Long iuser;
     private int monthLimit;
 }

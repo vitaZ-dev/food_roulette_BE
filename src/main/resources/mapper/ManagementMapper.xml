@@ -25,7 +25,7 @@
         select imanagement, year,month,month_limit monthLimit
         ,balance,expense
         from p_management
-        where iuser = #{iuser}
+        WHERE iuser = #{iuser}   AND (year &lt; year (now()) OR (year = YEAR(CURRENT_DATE) AND month &lt; MONTH(CURRENT_DATE)))
         order by year,month
     </select>
 
