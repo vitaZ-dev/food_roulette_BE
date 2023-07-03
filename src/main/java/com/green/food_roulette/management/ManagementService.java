@@ -54,7 +54,7 @@ public class ManagementService {
         return mapper.getUserThisMonthManagement(entity) ;
     }
 
-  @Scheduled(cron = "0 48 16 30 6 ?")
+    @Scheduled(cron = "0 50 23 L * ?")
     public void calculateUserManagement(){
         List<ManagementCalculateVo> calculateVos = mapper.monthTotalPayment();
         mapper.monthCalculate(calculateVos);
