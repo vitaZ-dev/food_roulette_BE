@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.zip.ZipException;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Tag(name = "유저")
 public class UserController {

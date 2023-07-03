@@ -3,11 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.food_roulette.tag_menu.TagMenuMapper">
-        <insert id="insTagMenu">
-                insert into p_tag_menu
-                set itag=#{itag}
-                ,imenu=#{imenu}
-        </insert>
+       <insert id="joinTagMenu">
+               insert into p_tag_menu
+               (imenu,itag)
+               VALUES
+               <foreach collection="list" item="item" open="(" separator="),(" close=")">
+                       #{item.imenu}, #{item.itag}
+               </foreach>
+       </insert>
+
+
         <select id="findMenuTag">
                 SELECT C.itag,C.tag
                 FROM p_tag_menu A
@@ -51,4 +56,6 @@
                 GROUP BY A.imenu
                 HAVING COUNT(*)>=#{size}
         </select>
+
+
 </mapper>

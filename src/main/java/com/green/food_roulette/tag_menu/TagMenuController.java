@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "태그")
 @RestController
-@RequestMapping("")
+@RequestMapping("/api")
 public class TagMenuController {
     private final TagMenuService service;
 

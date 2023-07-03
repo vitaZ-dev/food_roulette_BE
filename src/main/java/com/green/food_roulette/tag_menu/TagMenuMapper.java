@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface TagMenuMapper {
+    int joinTagMenu(List<TagMenuEntity> tag);
     List<TagMenuGetTagVo>getTagMenu(List<TagEntity> list,int size,Long iuser);
     int insTagMenu(TagMenuEntity entity);
 }

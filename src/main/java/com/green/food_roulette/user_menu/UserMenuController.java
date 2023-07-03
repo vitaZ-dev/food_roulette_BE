@@ -13,18 +13,24 @@ import java.util.List;
 import java.util.zip.ZipException;
 
 @RestController
-@RequestMapping("/menu/{iuser}")
+@RequestMapping("api/menu/{iuser}")
 @Tag(name = "메뉴")
 @RequiredArgsConstructor
 public class UserMenuController {
     private final UserMenuService service;
-    private final CommonMenuService commonMenuService;
+    //private final CommonMenuService commonMenuService;
 
     @PostMapping
     @Operation(summary = "유저 메뉴 생성",description = "iuser=유저 id" +
             " menu = 메뉴이름")
-    public List<UserMenuDto> postUserMenu(@RequestBody UserMenuInsDto dto) throws Exception{
-        return service.postUserMenu(dto);
+    public int postUserMenu(@RequestBody UserMenuInsDto dto,@RequestParam List<String> tags) {
+
+        try {
+            return service.postUserMenu(dto,tags);
+        } catch (ZipException e) {
+            return -1;
+        }
+
     }
     @GetMapping("/user")
     @Operation(summary = "유저 메뉴 불러오기")
@@ -48,11 +54,11 @@ public class UserMenuController {
         dto.setIuserMenu(iuserMenu);
         return service.updActivation(dto);
     }
-     @GetMapping("/common")
-     @Operation(summary = "공통 메뉴 불러오기")
-        public List<CommonMenuVo> getCommonMenu(){
-         return commonMenuService.getCommonMenu();
-   }
+//     @GetMapping("/common")
+//     @Operation(summary = "공통 메뉴 불러오기")
+//        public List<CommonMenuVo> getCommonMenu(){
+//         return commonMenuService.getCommonMenu();
+//   }
    @GetMapping
     @Operation(summary = "메뉴리스트",description = "iuser= 유저 id")
     public List<MenusVo> getMenus(@PathVariable Long iuser){
