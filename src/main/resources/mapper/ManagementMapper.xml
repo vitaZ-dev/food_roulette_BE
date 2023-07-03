@@ -14,11 +14,11 @@
 
     <select id="getUserThisMonthManagement">
         SELECT A.imanagement,A.year,A.month,A.month_limit monthLimit
-        ,ifnull(A.month_limit - sum(B.current_menu_price),0)balance ,ifnull(sum(B.current_menu_price) ,0)expense
+        ,ifnull(A.month_limit - sum(B.current_menu_price),A.month_limit)balance ,ifnull(sum(B.current_menu_price) ,0)expense
         FROM p_management A
         INNER JOIN p_payment B
         ON A.imanagement=B.imanagement
-        WHERE A.iuser=#{iuser} and A.YEAR=YEAR(NOW()) AND A.MONTH=MONTH(NOW())
+        WHERE A.iuser=2 and A.YEAR=YEAR(NOW()) AND A.MONTH=MONTH(NOW())
     </select>
 
     <select id="getUserManagementList">
@@ -32,7 +32,7 @@
     <select id="monthTotalPayment">
         SELECT imanagement,sum(current_menu_price) total
         FROM p_payment
-        WHERE month(payment_at)=MONTH(NOW())
+        WHERE YEAR(payment_at) = YEAR(NOW()) AND MONTH(payment_at) = MONTH(NOW())
         GROUP BY imanagement
     </select>
     
