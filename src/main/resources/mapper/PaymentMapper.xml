@@ -65,6 +65,20 @@
         where ipayment=#{ipayment}
     </update>
 
+    <delete id="deldteUserPayment">
+        DELETE
+        FROM A
+        USING p_payment A
+        LEFT JOIN (
+        SELECT x.imanagement,y.iuser
+        FROM p_management x
+        INNER JOIN p_user y
+        ON x.iuser=y.iuser
+        )B
+        ON A.imanagement= B.imanagement
+        WHERE A.ipayment=#{ipayment} AND B.iuser=#{iuser}
+    </delete>
+
 
 
 </mapper>

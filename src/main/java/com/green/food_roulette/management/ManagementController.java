@@ -40,7 +40,9 @@ public class ManagementController {
     }
 
     @GetMapping("/calculate/{iuser}")
-    @Operation(summary = "선택한 달의 목표와 소비내역",description = "iuser=유저 id,")
+    @Operation(summary = "선택한 달의 목표와 소비내역",description = "iuser=유저 id," +
+            " year = yyyy로 입력" +
+            " month = dd")
     public ManagementRes getUserManagementList(@PathVariable Long iuser, @RequestParam int month,@RequestParam String year){
         ManagementEntity entity = new ManagementEntity();
         entity.setIuser(iuser);
@@ -50,7 +52,7 @@ public class ManagementController {
     }
 
     @PatchMapping("/main/{iuser}")
-    @Operation(summary = "이달의 한도 수정",description = "")
+    @Operation(summary = "이달의 한도 수정",description = "monthLimit = 추가할 한도 기존한도에서 + 할 금액")
     public ManagementMonthVo patchUserMonthManagement(@PathVariable Long iuser,@RequestBody ManagemetSetMonthDto dto)throws Exception{
         ManagementEntity entity = new ManagementEntity();
         entity.setMonthLimit(dto.getMonthLimit());

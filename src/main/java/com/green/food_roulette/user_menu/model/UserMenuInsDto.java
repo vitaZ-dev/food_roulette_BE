@@ -8,5 +8,5 @@ import java.util.List;
 public class UserMenuInsDto {
     private Long iuser;
     private String menu;
-    ;
+    private List<String> tags;
 }
