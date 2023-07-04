@@ -32,7 +32,7 @@
 
 
         <select id="getTagMenu" resultType="TagMenuGetTagVo">
-                SELECT  A.itag itag,A.imenu imenu,B.menu menu ,COUNT(*)
+                SELECT  A.imenu imenu,B.menu menu ,COUNT(*)
                 from (
                         SELECT X.itag,X.imenu,Y.tag
                         FROM p_tag_menu X

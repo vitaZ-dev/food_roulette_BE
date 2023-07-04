@@ -62,7 +62,7 @@ public class UserMenuController {
 //   }
    @GetMapping
     @Operation(summary = "메뉴리스트",description = "iuser= 유저 id")
-    public List<MenusVo> getMenus(@PathVariable Long iuser){
+    public List<UserMenuRes> getMenus(@PathVariable Long iuser){
        UserMenuIuserDto dto = new UserMenuIuserDto();
        dto.setIuser(iuser);
        return service.getMenus(dto);
