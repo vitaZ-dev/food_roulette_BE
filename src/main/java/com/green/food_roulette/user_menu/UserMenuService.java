@@ -111,4 +111,7 @@ public class UserMenuService {
             }
             return tagMenuMapper.delMenuTag(entity);
         }
+        public Long delTag(TagMenuEntity entity){
+            return tagMenuMapper.delTag(entity);
+        }
     }

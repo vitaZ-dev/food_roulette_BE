@@ -1,6 +1,7 @@
 package com.green.food_roulette.tag_menu;
 
 
+import com.green.food_roulette.tag.TagMapper;
 import com.green.food_roulette.tag.model.TagEntity;
 import com.green.food_roulette.tag_menu.model.TagMenuGetTagDto;
 import com.green.food_roulette.tag_menu.model.TagMenuGetTagVo;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TagMenuService {
     private final TagMenuMapper mapper;
+    private final TagMapper tagMapper;
 
     public List<TagMenuGetTagVo> getTagMenu(List<String>list,Long iuser){
         List<TagEntity> arrayList = new ArrayList<>();
@@ -28,8 +30,9 @@ public class TagMenuService {
         dto.setSize(arrayList.size());
         dto.setIuser(iuser);
         return mapper.getTagMenu(arrayList,arrayList.size(),iuser);
-
-
+    }
+    public Long insTag(TagEntity entity){
+        tagMapper.findTag(entity);
 
     }
 }

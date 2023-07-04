@@ -4,6 +4,7 @@ import com.green.food_roulette.common_menu.CommonMenuService;
 import com.green.food_roulette.common_menu.model.CommonMenuEntity;
 import com.green.food_roulette.common_menu.model.CommonMenuVo;
 import com.green.food_roulette.tag_menu.model.MenuDto;
+import com.green.food_roulette.tag_menu.model.TagMenuEntity;
 import com.green.food_roulette.user_menu.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,13 +26,11 @@ public class UserMenuController {
     @Operation(summary = "유저 메뉴 생성",description = "iuser=유저 id" +
             " menu = 메뉴이름")
     public int postUserMenu(@RequestBody UserMenuInsDto dto,@RequestParam List<String> tags) {
-
         try {
             return service.postUserMenu(dto,tags);
         } catch (ZipException e) {
             return -1;
         }
-
     }
     @GetMapping("/user")
     @Operation(summary = "유저 메뉴 불러오기")
@@ -68,11 +67,19 @@ public class UserMenuController {
        return service.getMenus(dto);
    }
    @DeleteMapping
-   @Operation(summary = "태그 삭제",description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
+   @Operation(summary = "메뉴 삭제",description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
     public Long delMenuTag(@PathVariable Long iuser, @RequestParam Long iuserMenu){
        UserMenuEntity entity = new UserMenuEntity();
        entity.setIuser(iuser);
        entity.setIuserMenu(iuserMenu);
        return service.delMenuTag(entity);
+   }
+   @DeleteMapping("/itag")
+    public Long delTag(@PathVariable Long iuser,@RequestParam Long itag, Long iuserMenu){
+       TagMenuEntity entity = new TagMenuEntity();
+       entity.setIuser(iuser);
+       entity.setItag(itag);
+       entity.setIuserMenu(iuserMenu);
+       return service.delTag(entity);
    }
 }
