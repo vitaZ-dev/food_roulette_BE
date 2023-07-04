@@ -53,4 +53,9 @@ public class PaymentService {
 
 
     }
+    public int deldteUserPayment(PaymentDelDto dto){
+        
+        int result = mapper.deldteUserPayment(dto);
+        return result;
+    }
 }

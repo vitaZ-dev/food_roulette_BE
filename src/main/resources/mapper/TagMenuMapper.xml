@@ -12,11 +12,16 @@
                </foreach>
        </insert>
 
-        <insert id="insTag" useGeneratedKeys="true" keyProperty="itag">
+        <insert id="insTag">
                 insert into p_tag_menu
                 set imenu=#{imenu}
                 ,itag=#{itag}
         </insert>
+        <select id="findUserMenuTag">
+                select itag
+                from p_tag_menu
+                where imenu=#{imenu}
+        </select>
         <select id="findMenuTag">
                 SELECT C.itag,C.tag
                 FROM p_tag_menu A

@@ -15,31 +15,33 @@ import java.util.List;
 import java.util.zip.ZipException;
 
 @RestController
-@RequestMapping("api/menu/{iuser}")
+@RequestMapping("api/menu")
 @Tag(name = "메뉴")
 @RequiredArgsConstructor
 public class UserMenuController {
     private final UserMenuService service;
-    //private final CommonMenuService commonMenuService;
+    private final CommonMenuService commonMenuService;
 
     @PostMapping
-    @Operation(summary = "유저 메뉴 생성",description = "iuser=유저 id" +
+    @Operation(summary = "유저 메뉴 생성", description = "iuser=유저 id" +
             " menu = 메뉴이름")
-    public int postUserMenu(@RequestBody UserMenuInsDto dto,@RequestParam List<String> tags) {
+    public int postUserMenu(@RequestBody UserMenuInsDto dto, @RequestParam List<String> tags) {
         try {
-            return service.postUserMenu(dto,tags);
+            return service.postUserMenu(dto);
         } catch (ZipException e) {
             return -1;
         }
     }
-    @GetMapping("/user")
+
+    @GetMapping("/{iuser}/user")
     @Operation(summary = "유저 메뉴 불러오기")
-    public List<UserMenuVo> getUserMenu(@PathVariable Long iuser){
+    public List<UserMenuRes> getUserMenu(@PathVariable Long iuser) {
         UserMenuIuserDto dto = new UserMenuIuserDto();
         dto.setIuser(iuser);
         return service.getUserMenu(dto);
     }
-//    @GetMapping
+
+    //    @GetMapping
 //    @Operation(summary = "메뉴 불러오기")
 //    public List<UserMenuVo> getActivationUserMenu(@PathVariable Long iuser){
 //        UserMenuIuserDto dto = new UserMenuIuserDto();
@@ -54,32 +56,35 @@ public class UserMenuController {
 //        dto.setIuserMenu(iuserMenu);
 //        return service.updActivation(dto);
 //    }
-//     @GetMapping("/common")
-//     @Operation(summary = "공통 메뉴 불러오기")
-//        public List<CommonMenuVo> getCommonMenu(){
-//         return commonMenuService.getCommonMenu();
-//   }
-   @GetMapping
-    @Operation(summary = "메뉴리스트",description = "iuser= 유저 id")
-    public List<UserMenuRes> getMenus(@PathVariable Long iuser){
-       UserMenuIuserDto dto = new UserMenuIuserDto();
-       dto.setIuser(iuser);
-       return service.getMenus(dto);
-   }
-   @DeleteMapping
-   @Operation(summary = "메뉴 삭제",description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
-    public Long delMenuTag(@PathVariable Long iuser, @RequestParam Long iuserMenu){
-       UserMenuEntity entity = new UserMenuEntity();
-       entity.setIuser(iuser);
-       entity.setIuserMenu(iuserMenu);
-       return service.delMenuTag(entity);
-   }
-   @DeleteMapping("/itag")
-    public Long delTag(@PathVariable Long iuser,@RequestParam Long itag, Long iuserMenu){
-       TagMenuEntity entity = new TagMenuEntity();
-       entity.setIuser(iuser);
-       entity.setItag(itag);
-       entity.setIuserMenu(iuserMenu);
-       return service.delTag(entity);
-   }
-}
+    @GetMapping("/common")
+    @Operation(summary = "공통 메뉴 불러오기")
+    public List<UserMenuRes> getCommonMenu() {
+        return commonMenuService.getCommonMenu();
+    }
+
+    @GetMapping("/{iuser}")
+    @Operation(summary = "메뉴리스트", description = "iuser= 유저 id")
+    public List<UserMenuRes> getMenus(@PathVariable Long iuser) {
+        UserMenuIuserDto dto = new UserMenuIuserDto();
+        dto.setIuser(iuser);
+        return service.getMenus(dto);
+    }
+
+    @DeleteMapping("/{iuser}")
+    @Operation(summary = "메뉴 삭제", description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
+    public Long delMenuTag(@PathVariable Long iuser, @RequestParam Long iuserMenu) {
+        UserMenuEntity entity = new UserMenuEntity();
+        entity.setIuser(iuser);
+        entity.setIuserMenu(iuserMenu);
+        return service.delMenuTag(entity);
+    }
+        @DeleteMapping("/itag")
+        public Long delTag(@PathVariable Long iuser,@RequestParam Long itag, Long iuserMenu){
+            TagMenuEntity entity = new TagMenuEntity();
+            entity.setIuser(iuser);
+            entity.setItag(itag);
+            entity.setIuserMenu(iuserMenu);
+            return service.delTag(entity);
+
+    }
+    }
