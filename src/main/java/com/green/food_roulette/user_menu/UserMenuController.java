@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.zip.ZipException;
 
 @RestController
-@RequestMapping("api/menu/{iuser}")
+@RequestMapping("api/menu")
 @Tag(name = "메뉴")
 @RequiredArgsConstructor
 public class UserMenuController {
@@ -33,7 +33,7 @@ public class UserMenuController {
         }
 
     }
-    @GetMapping("/user")
+    @GetMapping("/user/{iuser}")
     @Operation(summary = "유저 메뉴 불러오기")
     public List<UserMenuVo> getUserMenu(@PathVariable Long iuser){
         UserMenuIuserDto dto = new UserMenuIuserDto();
@@ -60,14 +60,14 @@ public class UserMenuController {
 //        public List<CommonMenuVo> getCommonMenu(){
 //         return commonMenuService.getCommonMenu();
 //   }
-   @GetMapping
+   @GetMapping("/{iuser}")
     @Operation(summary = "메뉴리스트",description = "iuser= 유저 id")
     public List<UserMenuRes> getMenus(@PathVariable Long iuser){
        UserMenuIuserDto dto = new UserMenuIuserDto();
        dto.setIuser(iuser);
        return service.getMenus(dto);
    }
-   @PutMapping
+   @PutMapping("/{iuser}")
    @Operation(summary = "태그 삭제(메뉴 안보이게)",description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
     public Long delMenuTag(@PathVariable Long iuser, @RequestParam Long iuserMenu){
        UserMenuEntity entity = new UserMenuEntity();
