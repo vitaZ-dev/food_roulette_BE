@@ -39,7 +39,7 @@
         )B
         ON A.imenu=B.iuser_menu
         WHERE month(A.payment_at)=#{month} and year(A.payment_at)= #{year}
-        GROUP BY B.menu;
+        GROUP BY B.menu
     </select>
 
     <select id="monthTotalPayment">
