@@ -48,13 +48,13 @@ public class UserMenuController {
 //        return service.getActivationUserMenu(dto);
     // 활성화된 유저메뉴 불러오기
 //    }
-    @DeleteMapping
-    @Operation(summary = "메뉴 삭제" ,description = "삭제할 메뉴의 id값")
-    public int updActivation(@RequestParam Long iuserMenu ){
-        UserMenuIuserMenuDto dto = new UserMenuIuserMenuDto();
-        dto.setIuserMenu(iuserMenu);
-        return service.updActivation(dto);
-    }
+//    @DeleteMapping
+//    @Operation(summary = "메뉴 삭제" ,description = "삭제할 메뉴의 id값")
+//    public int updActivation(@RequestParam Long iuserMenu ){
+//        UserMenuIuserMenuDto dto = new UserMenuIuserMenuDto();
+//        dto.setIuserMenu(iuserMenu);
+//        return service.updActivation(dto);
+//    }
 //     @GetMapping("/common")
 //     @Operation(summary = "공통 메뉴 불러오기")
 //        public List<CommonMenuVo> getCommonMenu(){
