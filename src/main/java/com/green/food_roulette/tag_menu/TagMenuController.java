@@ -1,6 +1,7 @@
 package com.green.food_roulette.tag_menu;
 
 import com.green.food_roulette.tag_menu.model.TagMenuGetDto;
+import com.green.food_roulette.tag_menu.model.TagMenuGetTagDto;
 import com.green.food_roulette.tag_menu.model.TagMenuGetTagVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
