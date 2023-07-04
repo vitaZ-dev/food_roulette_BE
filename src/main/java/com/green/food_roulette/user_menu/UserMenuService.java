@@ -41,7 +41,7 @@ public class UserMenuService {
             for (int i = 0; i < tags.size(); i++) {
                 TagMenuEntity tagMenuEntity = new TagMenuEntity();
                 TagEntity tagEntity = new TagEntity();
-                tagMenuEntity.setImenu(userMenu.getIuserMenu());
+                tagMenuEntity.setImenu(entity.getIuserMenu());
                 tagEntity.setTag(tags.get(i));
                 Long itag = tagMapper.findTag(tagEntity);
                 if (itag == null) {
