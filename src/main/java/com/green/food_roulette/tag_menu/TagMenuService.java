@@ -2,6 +2,7 @@ package com.green.food_roulette.tag_menu;
 
 
 import com.green.food_roulette.tag.model.TagEntity;
+import com.green.food_roulette.tag_menu.model.TagMenuGetDto;
 import com.green.food_roulette.tag_menu.model.TagMenuGetTagDto;
 import com.green.food_roulette.tag_menu.model.TagMenuGetTagVo;
 import lombok.RequiredArgsConstructor;
@@ -15,18 +16,18 @@ import java.util.List;
 public class TagMenuService {
     private final TagMenuMapper mapper;
 
-    public List<TagMenuGetTagVo> getTagMenu(List<String>list,Long iuser){
+    public List<TagMenuGetTagVo> getTagMenu(TagMenuGetDto dto, Long iuser){
         List<TagEntity> arrayList = new ArrayList<>();
-        if (list.size()==0){return null;}
+        if (dto.getTags().size()==0){return null;}
 
-        for (String tag : list) {
+        for (String tag : dto.getTags()) {
             TagEntity entity = new TagEntity();
             entity.setTag(tag.replaceAll("\\s",""));
             arrayList.add(entity);
         }
-        TagMenuGetTagDto dto = new TagMenuGetTagDto();
-        dto.setSize(arrayList.size());
-        dto.setIuser(iuser);
+        TagMenuGetTagDto tDto = new TagMenuGetTagDto();
+        tDto.setSize(arrayList.size());
+        tDto.setIuser(iuser);
         return mapper.getTagMenu(arrayList,arrayList.size(),iuser);
 
 

@@ -17,14 +17,12 @@ import java.util.List;
 public class PaymentController {
     private final PaymentService service;
 
-    @PostMapping("/main/{iuser}")
+    @PostMapping("/main")
     @Operation(summary = "당첨 메뉴 등록", description = "imenu=메뉴의 id값" +
             " imanagement=이달의 목표 id값")
     public int setUserPayment(@RequestBody PyamentInsDto dto) {
         return service.insUserPayment(dto);
     }
-
-    ;
 
     @GetMapping("/calendar/{iuser}")
     @Operation(summary = "해당 달의 소비 내역들", description = "iuser=유저id" +
