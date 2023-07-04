@@ -67,8 +67,8 @@ public class UserMenuController {
        dto.setIuser(iuser);
        return service.getMenus(dto);
    }
-   @PutMapping
-   @Operation(summary = "태그 삭제(메뉴 안보이게)",description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
+   @DeleteMapping
+   @Operation(summary = "태그 삭제",description = "iuser= 유저id iuserMenu=삭제할 메뉴pk값")
     public Long delMenuTag(@PathVariable Long iuser, @RequestParam Long iuserMenu){
        UserMenuEntity entity = new UserMenuEntity();
        entity.setIuser(iuser);

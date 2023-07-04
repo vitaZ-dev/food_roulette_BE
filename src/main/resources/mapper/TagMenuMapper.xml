@@ -63,6 +63,9 @@
                 on A.imenu = B.iuser_menu
                 where B.iuser=#{iuser} and B.iuser_menu = #{iuserMenu}
         </delete>
+        <delete id="delTag">
+                delete from
+        </delete>
 
 
 </mapper>
