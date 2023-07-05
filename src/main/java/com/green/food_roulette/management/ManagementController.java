@@ -19,7 +19,7 @@ public class ManagementController {
     @PostMapping("/main/{iuser}/plan")
     @Operation(summary = "이달의 목표 설정하기",description = "iuser=유저 pk" +
             "   monthLimit= 원하는 한도"  )
-    public ManagementMonthVo setUserMonthManagement(@PathVariable Long iuser,@RequestBody ManagemetSetMonthDto dto){
+    public ManagementMonthVo setUserMonthManagement(@PathVariable Long iuser,@RequestBody ManagemetSetMonthDto dto)throws Exception{
         ManagementEntity entity = new ManagementEntity();
         entity.setIuser(iuser);
         entity.setMonthLimit(dto.getMonthLimit());
@@ -32,9 +32,9 @@ public class ManagementController {
         ManagementEntity entity = new ManagementEntity();
         entity.setIuser(iuser);
        try {
-           ManagementMonthVo result = service.getUserThisMonthManagement(entity);
-           return result;
+           return   service.getUserThisMonthManagement(entity);
        }catch (Exception e){
+           e.printStackTrace();
            return null;
        }
     }

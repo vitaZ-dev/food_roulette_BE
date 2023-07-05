@@ -17,21 +17,29 @@ public class PaymentService {
     private final PaymentMapper mapper;
     private final ManagementMapper managementMapper;
 
-
-    public int insUserPayment(PyamentInsDto dto) {
+    @Transactional(rollbackFor = Exception.class)
+    public PaymentMenuVo insUserPayment(PyamentInsDto dto)throws Exception {
         PaymentEntity entity = new PaymentEntity();
         entity.setImenu(dto.getImenu());
         entity.setImanagement(dto.getImanagement());
-        return mapper.insUserPayment(entity);
+        mapper.insUserPayment(entity);
+       return mapper.getUserPic(entity.getIpayment());
+
     }
 
     public List<PaymentMonthListVo> getUserPaymentList(PaymentMonthListDto dto) {
         return mapper.getUserPaymentList(dto);
     }
 
+    public List<PaymentReviewListVo>getNotReviewAt(PaymentMonthListDto dto){
+        return mapper.getNotReviewAt(dto);
+    }
+
     public List<PaymentDetailVo> getUserDetailPayment(PaymentDetailDto dto) {
         return mapper.getUserDetailPayment(dto);
     }
+
+
 
     @Transactional(rollbackFor = Exception.class)
     public int reviewPayment(PaymentReviewDto dto, Long iuser) throws Exception {

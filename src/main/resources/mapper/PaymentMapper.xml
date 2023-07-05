@@ -4,10 +4,31 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.food_roulette.payment.PaymentMapper">
     <insert id="insUserPayment" useGeneratedKeys="true" keyProperty="ipayment">
-        INSERT INTO p_payment
-        set imenu=#{imenu}
-        ,imanagement=#{imanagement}
+        INSERT INTO p_payment (imenu, imanagement)
+        VALUES (#{imenu}, #{imanagement})
     </insert>
+    <select id="getUserPic">
+        SELECT  B.imanagement,A.ipayment,C.menu,A.payment_at paymentAt
+        FROM p_payment A
+        INNER JOIN (
+        SELECT X.imanagement
+        FROM p_management X
+        INNER JOIN p_user Y
+        ON X.iuser=Y.iuser
+
+        ) B
+        ON A.imanagement = B.imanagement
+        INNER JOIN(
+        SELECT icommon_menu,menu
+        FROM p_common_menu
+        UNION
+        SELECT iuser_menu,menu
+        FROM p_user_menu A
+
+        )C
+        ON A.imenu=C.icommon_menu
+        WHERE A.ipayment=#{ipayment}
+    </select>
     <select id="getUserPaymentList">
         SELECT A.ipayment,DATE(A.payment_at) paymentAt,SUM(A.current_menu_price) total
                 ,case
@@ -49,6 +70,33 @@
         ON A.imenu=C.icommon_menu
         WHERE DATE(A.payment_at)=#{paymentAt}
         
+    </select>
+    
+    <select id="getNotReviewAt">
+        SELECT A.ipayment,DATE(A.payment_at) paymentAt,C.menu
+        ,case
+        when  A.restaurant is NULL then '0' ELSE '1'
+        end  cmt
+        FROM p_payment A
+        INNER JOIN (
+        SELECT X.imanagement
+        FROM p_management X
+        INNER JOIN p_user Y
+        ON X.iuser=Y.iuser
+        WHERE X.iuser=#{iuser} AND X.year=#{year} AND X.month=#{month}
+        ) B
+        ON A.imanagement = B.imanagement
+        INNER JOIN (
+        SELECT icommon_menu,menu
+        FROM p_common_menu
+        UNION
+        SELECT iuser_menu,menu
+        FROM p_user_menu
+        WHERE iuser=#{iuser}
+        ) C
+        ON A.imenu=C.icommon_menu
+        WHERE  A.restaurant IS null
+        ORDER BY A.payment_at
     </select>
 
     <select id="getCruuntMenuPrice" resultType="int">

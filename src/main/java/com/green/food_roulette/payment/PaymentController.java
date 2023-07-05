@@ -20,9 +20,12 @@ public class PaymentController {
 
     @PostMapping("/main")
     @Operation(summary = "당첨 메뉴 등록", description = "imenu=메뉴의 id값" +
-            " imanagement=이달의 목표 id값")
-    public int setUserPayment(@RequestBody PyamentInsDto dto) {
-        return service.insUserPayment(dto);
+            " imanagement=이달의 목표 id값" +
+            "null이 리턴하면 등록 오류")
+    public PaymentMenuVo setUserPayment(@RequestBody PyamentInsDto dto) throws Exception {
+
+            return service.insUserPayment(dto);
+
     }
 
     @GetMapping("/calendar/{iuser}")
@@ -37,6 +40,7 @@ public class PaymentController {
         return service.getUserPaymentList(dto);
     }
 
+
     @GetMapping("/calendar/{iuser}/detail")
     @Operation(summary = "해당 일의 소비 내역들 ", description = "paymentAt ex)yy-mm-dd 날자정보" +
             "iuser= 유저 id")
@@ -48,7 +52,17 @@ public class PaymentController {
 
     }
 
-    @PatchMapping("/calendar/{iuser}/detail")
+    @GetMapping("/review/{iuser}")
+    @Operation(summary = "리뷰 미등록 리스트")
+    public List<PaymentReviewListVo>getNotReviewAt(@PathVariable Long iuser, String year, int month){
+        PaymentMonthListDto dto = new PaymentMonthListDto();
+        dto.setIuser(iuser);
+        dto.setYear(year);
+        dto.setMonth(month);
+        return service.getNotReviewAt(dto);
+    }
+
+    @PatchMapping("/review/{iuser}")
     @Operation(summary = "후기 작성", description = "유저 id" +
             "  ipayment=리뷰 id값" +
             " currentmenupirce= 먹은 가격" +

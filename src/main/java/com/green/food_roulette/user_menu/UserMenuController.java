@@ -1,9 +1,7 @@
 package com.green.food_roulette.user_menu;
 
 import com.green.food_roulette.common_menu.CommonMenuService;
-import com.green.food_roulette.common_menu.model.CommonMenuEntity;
-import com.green.food_roulette.common_menu.model.CommonMenuVo;
-import com.green.food_roulette.tag_menu.model.MenuDto;
+
 import com.green.food_roulette.tag_menu.model.TagMenuEntity;
 import com.green.food_roulette.user_menu.model.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,7 +23,7 @@ public class UserMenuController {
     @PostMapping
     @Operation(summary = "유저 메뉴 생성", description = "iuser=유저 id" +
             " menu = 메뉴이름")
-    public int postUserMenu(@RequestBody UserMenuInsDto dto, @RequestParam List<String> tags) {
+    public int postUserMenu(@RequestBody UserMenuInsDto dto) {
         try {
             return service.postUserMenu(dto);
         } catch (ZipException e) {

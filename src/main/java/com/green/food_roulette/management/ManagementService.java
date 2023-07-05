@@ -14,16 +14,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ManagementService {
     private final ManagementMapper mapper;
+    @Transactional(rollbackFor = Exception.class)
+    public ManagementMonthVo setUserThisMonthManagement(ManagementEntity entity) throws Exception{
 
-    public ManagementMonthVo setUserThisMonthManagement(ManagementEntity entity) {
-        ManagementMonthVo result;
-        try {
-            result = mapper.getUserThisMonthManagement(entity);
-        } catch (Exception e) {
-            mapper.setUserThisMonthManagement(entity);
-            result = mapper.getUserThisMonthManagement(entity);
-        }
-        return result;
+
+        int  result = mapper.setUserThisMonthManagement(entity);
+            if (result<0){throw new Exception();}
+                ManagementMonthVo management = mapper.getUserThisMonthManagement(entity);
+
+        return management ;
 
 
     }
@@ -32,6 +31,7 @@ public class ManagementService {
         try {
             return mapper.getUserThisMonthManagement(entity);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception();
         }
     }
