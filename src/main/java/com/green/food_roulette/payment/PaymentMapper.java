@@ -11,6 +11,7 @@ public interface PaymentMapper {
     List<PaymentMonthListVo>getUserPaymentList(PaymentMonthListDto dto);
     List<PaymentDetailVo>getUserDetailPayment(PaymentDetailDto dto);
     int reviewPayment(PaymentReviewDto dto);
+    int getCruuntMenuPrice(PaymentDelDto dto);
     PaymentGetMonthVo getThisMonthPaymet(PaymentCalDto calDto);
     int deldteUserPayment(PaymentDelDto dto);
 }

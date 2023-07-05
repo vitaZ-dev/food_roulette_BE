@@ -9,7 +9,7 @@
         ,imanagement=#{imanagement}
     </insert>
     <select id="getUserPaymentList">
-        SELECT A.ipayment,DATE(A.payment_at) paymentAt,SUM(A.current_menu_price) total
+        SELECT B.imanagement,A.ipayment,DATE(A.payment_at) paymentAt,SUM(A.current_menu_price) total
                 ,case
                     when A.review_grade is NULL then '0' ELSE '1'
                 end  cmt
@@ -49,6 +49,12 @@
         ON A.imenu=C.icommon_menu
         WHERE DATE(A.payment_at)=#{paymentAt}
         ;
+    </select>
+
+    <select id="getCruuntMenuPrice" resultType="int">
+        select current_menu_price
+        from p_payment
+        where ipayment=#{ipayment}
     </select>
     
     <select id="getThisMonthPaymet">

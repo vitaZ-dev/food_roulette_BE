@@ -13,9 +13,10 @@ public interface ManagementMapper {
     ManagementMonthVo getUserThisMonthManagement(ManagementEntity entity);
     ManagementMonthVo getUserManagementList(ManagementEntity entity);
     List<ManagementPaymentVo> getUserMonthPaymentList(ManagementEntity entity);
-
+    ManagementMonthVo getManagement(ManagementRemDto dto);
     int updUserMonthManagement(ManagementEntity entity);
 
     int calculateManagement(PaymentCalDto dto);
+    int  remManagement(ManagementRemDto dto);
 
 }

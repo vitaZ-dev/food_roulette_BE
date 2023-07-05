@@ -1,5 +1,6 @@
 package com.green.food_roulette.payment;
 
+import com.green.food_roulette.management.model.ManagementMonthVo;
 import com.green.food_roulette.payment.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -66,10 +67,16 @@ public class PaymentController {
 
     @DeleteMapping("/calender/{iuser}/detail")
     @Operation(summary = "소비내역 삭제",description = "ipayment= 소비내역 id 번호 ")
-    public int deldteUserPayment(@PathVariable Long iuser,@RequestParam Long ipayment){
+    public ManagementMonthVo deldteUserPayment(@PathVariable Long iuser, @RequestParam Long ipayment,@RequestParam Long imanagement){
         PaymentDelDto dto = new PaymentDelDto();
         dto.setIpayment(ipayment);
         dto.setIuser(iuser);
-        return service.deldteUserPayment(dto);
+        dto.setImanagement(imanagement);
+        try {
+            return service.deldteUserPayment(dto);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
