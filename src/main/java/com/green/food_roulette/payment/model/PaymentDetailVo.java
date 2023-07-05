@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class PaymentDetailVo {
+    private Long imanagement;
     private Long ipayment;
     private String  menu;
     private String paymentAt;

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PaymentMonthListVo {
-    private Long imanagement;
+
     private Long ipayment;
     private String paymentAt;
     private int total;
