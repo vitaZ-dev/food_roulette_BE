@@ -3,6 +3,7 @@ package com.green.food_roulette.payment;
 import com.green.food_roulette.management.ManagementMapper;
 import com.green.food_roulette.management.model.ManagementMonthDto;
 import com.green.food_roulette.management.model.ManagementMonthVo;
+import com.green.food_roulette.management.model.ManagementRemDto;
 import com.green.food_roulette.payment.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,10 +53,19 @@ public class PaymentService {
 
 
     }
+    @Transactional(rollbackFor = Exception.class)
+    public ManagementMonthVo deldteUserPayment(PaymentDelDto dto)throws Exception {
+        int cruuntMenuPrice = mapper.getCruuntMenuPrice(dto);
 
-    public int deldteUserPayment(PaymentDelDto dto) {
+        ManagementRemDto remDto = new ManagementRemDto();
+        remDto.setImanagement(dto.getImanagement());
+        remDto.setIuser(dto.getIuser());
+        remDto.setCruuntMenuPrice(cruuntMenuPrice);
 
         int result = mapper.deldteUserPayment(dto);
-        return result;
+        if (result==0) throw new Exception();
+        managementMapper.remManagement(remDto);
+        ManagementMonthVo management = managementMapper.getManagement(remDto);
+        return management;
     }
 }

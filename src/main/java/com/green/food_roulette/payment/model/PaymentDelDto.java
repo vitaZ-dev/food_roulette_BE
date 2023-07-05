@@ -6,4 +6,5 @@ import lombok.Data;
 public class PaymentDelDto {
     private Long iuser;
     private Long ipayment;
+    private Long imanagement;
 }

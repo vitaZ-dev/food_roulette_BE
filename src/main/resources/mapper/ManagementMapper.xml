@@ -64,5 +64,17 @@
       where iuser=#{iuser} and year=#{year} and month=#{month}
   </update>
 
+  <update id="remManagement">
+      update p_management
+      set balance = balance+#{cruuntMenuPrice}
+      ,expense=expense-#{cruuntMenuPrice}
+      where iuser=#{iuser} and imanagement=#{imanagement}
+  </update>
+    <select id="getManagement">
+        SELECT imanagement,year,month,month_limit monthLimit
+        ,balance ,expense
+        FROM p_management
+        where imanagement=#{imanagement}
+    </select>
 
 </mapper>
