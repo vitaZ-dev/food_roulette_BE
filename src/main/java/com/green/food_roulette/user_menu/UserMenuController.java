@@ -78,7 +78,8 @@ public class UserMenuController {
         entity.setIuserMenu(iuserMenu);
         return service.delMenuTag(entity);
     }
-        @DeleteMapping("/itag")
+        @DeleteMapping("/{iuser}/itag")
+        @Operation(summary = "태그 한개 삭제",description = "iuser=유저id iuserMenu=유저메뉴에 붙은 itag태그를 삭제함")
         public Long delTag(@PathVariable Long iuser,@RequestParam Long itag, Long iuserMenu){
             TagMenuEntity entity = new TagMenuEntity();
             entity.setIuser(iuser);
