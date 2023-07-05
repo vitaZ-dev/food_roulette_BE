@@ -17,23 +17,23 @@ public class PaymentService {
     private final ManagementMapper managementMapper;
 
 
-    public int insUserPayment(PyamentInsDto dto){
+    public int insUserPayment(PyamentInsDto dto) {
         PaymentEntity entity = new PaymentEntity();
         entity.setImenu(dto.getImenu());
         entity.setImanagement(dto.getImanagement());
         return mapper.insUserPayment(entity);
     }
 
-    public List<PaymentMonthListVo> getUserPaymentList(PaymentMonthListDto dto){
-       return mapper.getUserPaymentList(dto);
+    public List<PaymentMonthListVo> getUserPaymentList(PaymentMonthListDto dto) {
+        return mapper.getUserPaymentList(dto);
     }
 
-    public List<PaymentDetailVo>getUserDetailPayment(PaymentDetailDto dto){
+    public List<PaymentDetailVo> getUserDetailPayment(PaymentDetailDto dto) {
         return mapper.getUserDetailPayment(dto);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public int reviewPayment(PaymentReviewDto dto,Long iuser)throws Exception{
+    public int reviewPayment(PaymentReviewDto dto, Long iuser) throws Exception {
         PaymentCalDto calDto = new PaymentCalDto();
         calDto.setIuser(iuser);
         calDto.setYear(dto.getYear());
@@ -43,18 +43,18 @@ public class PaymentService {
 
         int balance = thisMonthPaymet.getBalance();
 
-        if (balance - dto.getCurrentMenuPrice() < 0){
+        if (balance - dto.getCurrentMenuPrice() < 0) {
 
             throw new Exception();
         }
-         mapper.reviewPayment(dto);
-       return managementMapper.calculateManagement(calDto);
-
+        mapper.reviewPayment(dto);
+        return managementMapper.calculateManagement(calDto);
 
 
     }
-    public int deldteUserPayment(PaymentDelDto dto){
-        
+
+    public int deldteUserPayment(PaymentDelDto dto) {
+
         int result = mapper.deldteUserPayment(dto);
         return result;
     }

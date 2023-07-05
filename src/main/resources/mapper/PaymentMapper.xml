@@ -48,7 +48,7 @@
         )C
         ON A.imenu=C.icommon_menu
         WHERE DATE(A.payment_at)=#{paymentAt}
-        ;
+        
     </select>
     
     <select id="getThisMonthPaymet">
