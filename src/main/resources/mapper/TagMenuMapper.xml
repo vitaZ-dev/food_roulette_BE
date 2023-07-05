@@ -12,7 +12,16 @@
                </foreach>
        </insert>
 
-
+        <insert id="insTag">
+                insert into p_tag_menu
+                set imenu=#{imenu}
+                ,itag=#{itag}
+        </insert>
+        <select id="findUserMenuTag">
+                select itag
+                from p_tag_menu
+                where imenu=#{imenu}
+        </select>
         <select id="findMenuTag">
                 SELECT C.itag,C.tag
                 FROM p_tag_menu A
@@ -64,7 +73,11 @@
                 where B.iuser=#{iuser} and B.iuser_menu = #{iuserMenu}
         </delete>
         <delete id="delTag">
-                delete from
+                delete from A
+                Using p_tag_menu A
+                left join p_user_menu B
+                on A.imenu = B.iuser_menu
+                where  A.itag = #{itag} and (B.iuser_menu = #{iuserMenu} and B.iuser = #{iuser})
         </delete>
 
 

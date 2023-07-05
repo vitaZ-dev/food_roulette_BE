@@ -98,6 +98,9 @@ public class UserMenuService {
         }
         return tagMenuMapper.delMenuTag(entity);
     }
+        public Long delTag (TagMenuEntity entity){
+            return tagMenuMapper.delTag(entity);
+        }
     private  List<UserMenuRes> getUserMenuRes(List<MenusVo> menus, List<UserMenuRes> userMenuList) {
         UserMenuRes userMenuRes;
         UserMenuResm userMenuResm;
