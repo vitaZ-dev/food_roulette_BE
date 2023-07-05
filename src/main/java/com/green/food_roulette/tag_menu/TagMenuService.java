@@ -47,7 +47,7 @@ public class TagMenuService {
                 }
                 entity.setItag(result);
                 try {
-                    Long it = mapper.insTag(entity);
+                    Long it = mapper.insOneTag(entity);
                     return it;
                 }catch (Exception e){
                     return -1L;
@@ -55,7 +55,7 @@ public class TagMenuService {
             } else {
                 tagMapper.insTag(tagEntity);
                 entity.setItag(tagEntity.getItag());
-                return mapper.insTag(entity);
+                return mapper.insOneTag(entity);
             }
 
 

@@ -14,6 +14,6 @@ public interface TagMenuMapper {
     int insTagMenu(TagMenuEntity entity);
     Long delMenuTag(UserMenuEntity entity);
     Long delTag(TagMenuEntity entity);
-    Long insTag(TagMenuEntity entity);
+    Long insOneTag(TagMenuEntity entity);
     List<TagMenuItagVo> findUserMenuTag(TagMenuEntity entity);
 }

@@ -12,7 +12,7 @@
                </foreach>
        </insert>
 
-        <insert id="insTag">
+        <insert id="insOneTag">
                 insert into p_tag_menu
                 set imenu=#{imenu}
                 ,itag=#{itag}

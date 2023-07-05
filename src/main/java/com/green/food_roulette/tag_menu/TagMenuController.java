@@ -19,7 +19,7 @@ import java.util.List;
 public class TagMenuController {
     private final TagMenuService service;
 
-    @PostMapping("/tag")
+    @PostMapping("/menu/{iuser}/tag")
     @Operation(summary = "태그 한개 생성",description = "imenu 값을 받아 태그를 만듬 -1이 오면 메뉴에 있는 태그")
     public Long insTag(@RequestBody TagMenuInsDto dto){
         return service.insTag(dto);
