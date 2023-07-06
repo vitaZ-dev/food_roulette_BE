@@ -26,11 +26,10 @@ public class TagMenuController {
 
     }
 
-    @GetMapping("/main/{iuser}/menu")
+//    @GetMapping("/main/{iuser}/menu")
     @PostMapping("/main/{iuser}/menu")
     @Operation(summary = "태그로 메뉴 검색",description = "list는 태그를 String타입배열로 받는다 ")
     public List<TagMenuGetTagVo> getTagMenu(@RequestBody TagMenuGetDto dto, @PathVariable Long iuser){
-
         return service.getTagMenu(dto,iuser);
     }
 
