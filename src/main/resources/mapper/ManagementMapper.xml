@@ -31,19 +31,18 @@
         SELECT B.menu,sum(A.current_menu_price) SUM ,COUNT(B.menu) count
         FROM p_payment A
         INNER JOIN  (
-        SELECT iuser_menu,menu
-        FROM p_user_menu
-
-        UNION
-        SELECT  icommon_menu, menu
-        FROM p_common_menu
+            SELECT iuser_menu,menu
+            FROM p_user_menu
+            UNION
+            SELECT  icommon_menu, menu
+            FROM p_common_menu
         )B
         ON A.imenu=B.iuser_menu
         INNER JOIN (
-        SELECT x.imanagement,z.iuser
-        FROM p_user z
-        INNER JOIN p_management x
-        ON z.iuser=x.iuser
+            SELECT x.imanagement,z.iuser
+            FROM p_user z
+            INNER JOIN p_management x
+            ON z.iuser=x.iuser
         )C
         ON A.imanagement=C.imanagement
         WHERE C.iuser=#{iuser} AND (month(A.payment_at)=#{month} and year(A.payment_at)=#{year})
@@ -60,8 +59,7 @@
     
     <update id="updUserMonthManagement">
         update  p_management
-        set
-            month_limit= month_limit + #{monthLimit}
+        set month_limit= month_limit + #{monthLimit}
         ,balance= balance + #{monthLimit}
         where iuser=#{iuser} and year=year(current_timestamp()) and month = month(current_timestamp())
     </update>
