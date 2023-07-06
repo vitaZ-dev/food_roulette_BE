@@ -7,5 +7,5 @@ public class PaymentCalDto {
     private Long iuser;
     private int month;
     private String year;
-    private int cruuntMenuPrice;
+    private int currentMenuPrice;
 }
