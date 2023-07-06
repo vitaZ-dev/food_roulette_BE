@@ -47,7 +47,7 @@ public class PaymentService {
         calDto.setIuser(iuser);
         calDto.setYear(dto.getYear());
         calDto.setMonth(dto.getMonth());
-        calDto.setCruuntMenuPrice(dto.getCurrentMenuPrice());
+        calDto.setCurrentMenuPrice(dto.getCurrentMenuPrice());
         PaymentGetMonthVo thisMonthPaymet = mapper.getThisMonthPaymet(calDto);
 
         int balance = thisMonthPaymet.getBalance();

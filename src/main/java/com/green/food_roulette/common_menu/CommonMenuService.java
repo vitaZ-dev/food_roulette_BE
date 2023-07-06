@@ -20,10 +20,11 @@ public class CommonMenuService {
 
     public  List<UserMenuRes> getCommonMenu(){
         List<MenusVo> menus= mapper.getCommonMenu();
-        List<UserMenuRes> userMenuList=new ArrayList<>();
-        return getUserMenuRes(menus,userMenuList);
+
+        return getUserMenuRes(menus);
     }
-    private  List<UserMenuRes> getUserMenuRes(List<MenusVo> menus, List<UserMenuRes> userMenuList) {
+    private  List<UserMenuRes> getUserMenuRes(List<MenusVo> menus) {
+        List<UserMenuRes> userMenuList =new ArrayList<>();
         UserMenuRes userMenuRes;
         UserMenuResm userMenuResm;
         List<UserMenuResm> tagList;
