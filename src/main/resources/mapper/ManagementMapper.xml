@@ -4,6 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.food_roulette.management.ManagementMapper">
     <insert id="setUserThisMonthManagement" >
+
         insert into p_management
         set iuser=#{iuser}
         ,month_limit=#{monthLimit}
@@ -25,19 +26,27 @@
 
     </select>
     <select id="getUserMonthPaymentList">
-        SELECT B.menu,sum(A.current_menu_price) sum
+        SELECT B.menu,sum(A.current_menu_price) SUM ,COUNT(B.menu) count
         FROM p_payment A
         INNER JOIN  (
         SELECT iuser_menu,menu
         FROM p_user_menu
-        WHERE iuser=#{iuser}
+
         UNION
         SELECT  icommon_menu, menu
         FROM p_common_menu
         )B
         ON A.imenu=B.iuser_menu
-        WHERE month(A.payment_at)=#{month} and year(A.payment_at)= #{year}
+        INNER JOIN (
+        SELECT x.imanagement,z.iuser
+        FROM p_user z
+        INNER JOIN p_management x
+        ON z.iuser=x.iuser
+        )C
+        ON A.imanagement=C.imanagement
+        WHERE C.iuser=#{iuser} AND (month(A.payment_at)=#{month} and year(A.payment_at)=#{year})
         GROUP BY B.menu
+        ORDER BY COUNT(B.menu) desc
     </select>
 
     <select id="monthTotalPayment">

@@ -8,4 +8,5 @@ import lombok.Getter;
 public class ManagementPaymentVo {
     private String menu;
     private int sum;
+    private int count;
 }

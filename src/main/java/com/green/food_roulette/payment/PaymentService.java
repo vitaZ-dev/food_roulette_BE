@@ -18,12 +18,12 @@ public class PaymentService {
     private final ManagementMapper managementMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    public PaymentMenuVo insUserPayment(PyamentInsDto dto)throws Exception {
-        PaymentEntity entity = new PaymentEntity();
-        entity.setImenu(dto.getImenu());
-        entity.setImanagement(dto.getImanagement());
-        mapper.insUserPayment(entity);
-       return mapper.getUserPic(entity.getIpayment());
+    public UserPaymentResVo insUserPayment(PyamentInsDto dto)throws Exception {
+        UserPaymentResVo vo = new UserPaymentResVo();
+        vo.setImenu(dto.getImenu());
+        vo.setImanagement(dto.getImanagement());
+        int result = mapper.insUserPayment(vo);
+       return vo;
 
     }
 

@@ -6,16 +6,25 @@
     <insert id="insUserPayment" useGeneratedKeys="true" keyProperty="ipayment">
         INSERT INTO p_payment (imenu, imanagement)
         VALUES (#{imenu}, #{imanagement})
+
+        <selectKey order="AFTER" resultType="UserPaymentResVo" keyProperty="menu" keyColumn="menu">
+            SELECT A.menu
+            FROM (
+                SELECT iuser_menu imenu, menu FROM p_user_menu
+                UNION
+                SELECT icommon_menu, menu FROM p_common_menu
+            ) A
+            WHERE A.imenu = #{imenu}
+        </selectKey>
     </insert>
     <select id="getUserPic">
-        SELECT  B.imanagement,A.ipayment,C.menu,A.payment_at paymentAt
+        SELECT  B.imanagement,A.ipayment, C.menu,A.payment_at paymentAt
         FROM p_payment A
         INNER JOIN (
-        SELECT X.imanagement
-        FROM p_management X
-        INNER JOIN p_user Y
-        ON X.iuser=Y.iuser
-
+            SELECT X.imanagement
+            FROM p_management X
+            INNER JOIN p_user Y
+            ON X.iuser=Y.iuser
         ) B
         ON A.imanagement = B.imanagement
         INNER JOIN(

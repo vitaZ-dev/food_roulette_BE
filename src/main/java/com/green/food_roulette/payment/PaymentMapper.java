@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface PaymentMapper {
-    int insUserPayment(PaymentEntity entity);
+    int insUserPayment(UserPaymentResVo vos);
     PaymentMenuVo getUserPic(Long ipayment);
     List<PaymentMonthListVo>getUserPaymentList(PaymentMonthListDto dto);
     List<PaymentReviewListVo>getNotReviewAt(PaymentMonthListDto dto);

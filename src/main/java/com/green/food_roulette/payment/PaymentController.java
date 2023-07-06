@@ -22,10 +22,8 @@ public class PaymentController {
     @Operation(summary = "당첨 메뉴 등록", description = "imenu=메뉴의 id값" +
             " imanagement=이달의 목표 id값" +
             "null이 리턴하면 등록 오류")
-    public PaymentMenuVo setUserPayment(@RequestBody PyamentInsDto dto) throws Exception {
-
+    public UserPaymentResVo setUserPayment(@RequestBody PyamentInsDto dto) throws Exception {
             return service.insUserPayment(dto);
-
     }
 
     @GetMapping("/calendar/{iuser}")
