@@ -16,14 +16,10 @@ import java.util.zip.ZipException;
 public class UserService {
     private final UserMapper mapper;
     public UserVo postUser(UserInsDto dto){
-        UserEntity entity = new UserEntity();
-        entity.setName(dto.getName());
-        UserVo result = mapper.findUser(entity);
-        if (result==null) {
-            mapper.insUser(entity);
-            result =  mapper.selUser(entity.getIuser());
-        }
-        return result;
+        UserVo vo = new UserVo();
+        vo.setName(dto.getName());
+        mapper.insUser(vo);
+        return vo;
     }
     public UserVo getUser(UserIuserDto dto){
         return mapper.getUser(dto);

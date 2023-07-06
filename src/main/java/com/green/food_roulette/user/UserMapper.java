@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-   Long insUser(UserEntity entity);
-   UserVo findUser(UserEntity entity);
-   UserVo selUser(Long iuser);
+   Long insUser(UserVo vo);
    UserVo getUser(UserIuserDto dto);
 }

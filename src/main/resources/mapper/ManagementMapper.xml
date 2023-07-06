@@ -4,11 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.food_roulette.management.ManagementMapper">
     <insert id="setUserThisMonthManagement" >
-
-        insert into p_management
-        set iuser=#{iuser}
-        ,month_limit=#{monthLimit}
-        ,balance=#{monthLimit}
+        INSERT INTO p_management (iuser,month_limit,balance)
+        SELECT #{iuser},#{monthLimit},#{monthLimit}
+        WHERE NOT EXISTS(
+        SELECT iuser,YEAR,month
+        FROM p_management
+        WHERE iuser=#{iuser} AND (month =month(now()) AND year=year(now()) )
+        )
     </insert>
 
     <select id="getUserThisMonthManagement">
