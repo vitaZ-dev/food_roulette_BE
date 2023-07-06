@@ -22,7 +22,7 @@ public class PaymentService {
         UserPaymentResVo vo = new UserPaymentResVo();
         vo.setImenu(dto.getImenu());
         vo.setImanagement(dto.getImanagement());
-        int result = mapper.insUserPayment(vo);
+         mapper.insUserPayment(vo);
        return vo;
 
     }

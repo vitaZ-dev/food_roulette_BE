@@ -7,14 +7,16 @@
         INSERT INTO p_payment (imenu, imanagement)
         VALUES (#{imenu}, #{imanagement})
 
-        <selectKey order="AFTER" resultType="UserPaymentResVo" keyProperty="menu" keyColumn="menu">
-            SELECT A.menu
-            FROM (
+        <selectKey order="AFTER" resultType="UserPaymentResVo" keyProperty="ipayment,paymentAt,menu">
+            SELECT A.ipayment, A.payment_at paymentAt, B.menu
+            FROM p_payment A
+            INNER JOIN (
                 SELECT iuser_menu imenu, menu FROM p_user_menu
                 UNION
                 SELECT icommon_menu, menu FROM p_common_menu
-            ) A
-            WHERE A.imenu = #{imenu}
+            ) B
+            ON A.imenu = B.imenu
+            WHERE A.ipayment = LAST_INSERT_ID();
         </selectKey>
     </insert>
     <select id="getUserPic">
