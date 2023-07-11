@@ -10,10 +10,11 @@ public interface UserMenuMapper {
     Long insUserMenu(UserMenuEntity entity);
     UserMenuFindVo findUserMenu(UserMenuEntity entity);
     UserMenuVo selUserMenu(Long iuserMenu);
-    List<MenusVo> getUserMenu(UserMenuIuserDto dto);
+    List<UserMenuRes> getUserMenu(UserMenuIuserDto dto);
+
     List<UserMenuVo> getActivationUserMenu(UserMenuIuserDto dto);
     int updActivation(UserMenuEntity entity);
 
     int findActivation(UserMenuEntity entity);
-    List<MenusVo> getMenus(UserMenuIuserDto dto);
+    List<UserMenuRes> getMenus(UserMenuIuserDto dto);
 }

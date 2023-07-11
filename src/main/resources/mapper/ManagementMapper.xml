@@ -66,8 +66,8 @@
 
   <update id="calculateManagement">
       update p_management
-      set balance=balance-#{cruuntMenuPrice}
-      ,expense=expense+#{cruuntMenuPrice}
+      set balance=balance-#{currentMenuPrice}
+      ,expense=expense+#{currentMenuPrice}
       where iuser=#{iuser} and year=#{year} and month=#{month}
   </update>
 

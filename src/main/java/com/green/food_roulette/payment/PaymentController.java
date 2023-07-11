@@ -77,7 +77,7 @@ public class PaymentController {
 
     }
 
-    @DeleteMapping("/calender/{iuser}/detail")
+    @DeleteMapping("/calendar/{iuser}/detail")
     @Operation(summary = "소비내역 삭제",description = "ipayment= 소비내역 id 번호 " +
             "imanagement = 삭제할 대상의 imanagement id")
     public ManagementMonthVo deldteUserPayment(@PathVariable Long iuser, @RequestParam Long ipayment,@RequestParam Long imanagement){

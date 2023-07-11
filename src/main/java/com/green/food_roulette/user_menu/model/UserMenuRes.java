@@ -9,4 +9,6 @@ public class UserMenuRes {
     private Long iuserMenu;
     private String menu;
     private List<UserMenuResm> tags;
+
+
 }

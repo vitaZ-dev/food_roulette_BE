@@ -57,9 +57,9 @@ public class UserMenuService {
 
 
     public List<UserMenuRes> getUserMenu(UserMenuIuserDto dto) {
-        List<MenusVo> menus = mapper.getUserMenu(dto);
 
-        return getUserMenuRes(menus);
+
+        return  mapper.getUserMenu(dto);
 
     }
 
@@ -84,8 +84,9 @@ public class UserMenuService {
     }
 
     public List<UserMenuRes> getMenus(UserMenuIuserDto dto) {
-        List<MenusVo> menus = mapper.getMenus(dto);
-        return getUserMenuRes(menus);
+       // List<MenusVo> menus = mapper.getMenus(dto);
+        return mapper.getMenus(dto);
+       // return getUserMenuRes(menus);
     }
 
 
@@ -100,7 +101,9 @@ public class UserMenuService {
         public Long delTag (TagMenuEntity entity){
             return tagMenuMapper.delTag(entity);
         }
-    private  List<UserMenuRes> getUserMenuRes(List<MenusVo> menus) {
+
+
+        private  List<UserMenuRes> getUserMenuRes(List<MenusVo> menus) {
        List<UserMenuRes> userMenuList= new ArrayList<>();
         UserMenuRes userMenuRes;
         UserMenuResm userMenuResm;
