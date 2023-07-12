@@ -8,6 +8,7 @@ import com.green.food_roulette.tag_menu.TagMenuMapper;
 import com.green.food_roulette.tag_menu.model.TagMenuEntity;
 import com.green.food_roulette.user_menu.model.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipException;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserMenuService {
@@ -83,11 +85,7 @@ public class UserMenuService {
         return entity.getActivation();
     }
 
-    public List<UserMenuRes> getMenus(UserMenuIuserDto dto) {
-       // List<MenusVo> menus = mapper.getMenus(dto);
-        return mapper.getMenus(dto);
-       // return getUserMenuRes(menus);
-    }
+
 
 
     public Long delMenuTag(UserMenuEntity entity) {
@@ -102,7 +100,23 @@ public class UserMenuService {
             return tagMenuMapper.delTag(entity);
         }
 
+    public List<UserMenuRes> getMenus(UserMenuIuserDto dto) {
+        long start = System.currentTimeMillis();
+        List<UserMenuRes> result = mapper.getMenus(dto);
+        long end = System.currentTimeMillis();
 
+        log.info("resultMap : {}", (end - start));
+        return result;
+
+    }
+    public List<UserMenuRes> getMenusTest(UserMenuIuserDto dto){
+        long start = System.currentTimeMillis();
+        List<MenusVo> menusTest = mapper.getMenusTest(dto);
+        List<UserMenuRes> result = getUserMenuRes(menusTest);
+        long end = System.currentTimeMillis();
+        log.info("groupConcat : {}", (end - start));
+        return result;
+    }
         private  List<UserMenuRes> getUserMenuRes(List<MenusVo> menus) {
        List<UserMenuRes> userMenuList= new ArrayList<>();
         UserMenuRes userMenuRes;

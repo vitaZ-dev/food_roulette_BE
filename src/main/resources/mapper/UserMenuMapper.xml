@@ -69,7 +69,9 @@
 <!--    resultMap적용해보기-->
     <resultMap id="inMenuTags" type="UserMenuRes">
         <id property="iuserMenu" column="iuserMenu"/>
-        <collection property="tags" javaType="java.util.List" ofType="UserMenuResm" column ="{iuserMenu=iuserMenu}" select="inTags"/>
+        <collection property="tags" javaType="java.util.List"
+                    ofType="UserMenuResm" column ="{iuserMenu=iuserMenu}"
+                    select="inTags"/>
     </resultMap>
     <select id="getMenus" resultMap="inMenuTags">
             SELECT iuser_menu AS iuserMenu, menu
@@ -87,23 +89,25 @@
         INNER JOIN p_tag_menu B ON A.itag = B.itag
         WHERE B.imenu = #{iuserMenu}
     </select>
-<!--    <select id="getMenus">-->
-<!--        SELECT B.iuser_menu iusermenu,B.menu, GROUP_CONCAT(A.tag) AS tags,GROUP_CONCAT(A.itag) AS itags-->
-<!--        FROM (-->
-<!--        SELECT x.imenu, x.itag, y.tag-->
-<!--        FROM p_tag_menu x-->
-<!--        INNER JOIN p_tag y-->
-<!--        ON x.itag = y.itag-->
-<!--        ) A-->
-<!--        INNER JOIN (-->
-<!--        SELECT iuser_menu,menu-->
-<!--        FROM p_user_menu-->
-<!--        WHERE iuser=#{iuser} AND activation=0-->
-<!--        union-->
-<!--        SELECT icommon_menu,menu-->
-<!--        FROM p_common_menu-->
-<!--        )B-->
-<!--        ON A.imenu=B.iuser_menu-->
-<!--        GROUP BY A.imenu-->
-<!--    </select>-->
+
+    <select id="getMenusTest">
+        SELECT B.iuser_menu iuserMenu,B.menu
+            , GROUP_CONCAT(A.tag) AS tags,GROUP_CONCAT(A.itag) AS itags
+        FROM (
+            SELECT x.imenu, x.itag, y.tag
+            FROM p_tag_menu x
+            INNER JOIN p_tag y
+            ON x.itag = y.itag
+        ) A
+        INNER JOIN (
+            SELECT iuser_menu,menu
+            FROM p_user_menu
+            WHERE iuser=#{iuser} AND activation=0
+            union
+            SELECT icommon_menu,menu
+            FROM p_common_menu
+        )B
+        ON A.imenu=B.iuser_menu
+        GROUP BY A.imenu
+    </select>
 </mapper>

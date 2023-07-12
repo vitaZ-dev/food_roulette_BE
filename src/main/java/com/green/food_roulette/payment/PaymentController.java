@@ -61,11 +61,11 @@ public class PaymentController {
     }
 
     @PatchMapping("/review/{iuser}")
-    @Operation(summary = "후기 작성", description = "유저 id" +
-            "  ipayment=리뷰 id값" +
-            " currentmenupirce= 먹은 가격" +
-            "review= 페페 스코어 1~3으로만 받기 가능" +
-            " restaurant =먹은 장소" +
+    @Operation(summary = "후기 작성", description = "유저 id\n" +
+            "  ipayment=리뷰 id값<br>" +
+            " currentmenupirce= 먹은 가격<br>" +
+            "review= 페페 스코어 1~3으로만 받기 가능<br>" +
+            " restaurant =먹은 장소<br>" +
             " 리턴으로 1이 오면 정상 등록 -1이면 한도초과")
     public int reviewPayment(@PathVariable Long iuser, @RequestBody PaymentReviewDto dto) {
 

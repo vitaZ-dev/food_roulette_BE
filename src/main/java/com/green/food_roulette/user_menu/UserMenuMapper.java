@@ -17,4 +17,5 @@ public interface UserMenuMapper {
 
     int findActivation(UserMenuEntity entity);
     List<UserMenuRes> getMenus(UserMenuIuserDto dto);
+    List<MenusVo>getMenusTest(UserMenuIuserDto dto);
 }

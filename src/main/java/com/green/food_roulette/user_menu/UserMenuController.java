@@ -38,6 +38,13 @@ public class UserMenuController {
         dto.setIuser(iuser);
         return service.getUserMenu(dto);
     }
+    @GetMapping("/{iuser}/user/test")
+    @Operation(summary = "유저 메뉴 불러오기test")
+    public List<UserMenuRes> getUserMenu1(@PathVariable Long iuser) {
+        UserMenuIuserDto dto = new UserMenuIuserDto();
+        dto.setIuser(iuser);
+        return service.getMenusTest(dto);
+    }
 
     //    @GetMapping
 //    @Operation(summary = "메뉴 불러오기")
